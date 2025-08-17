@@ -4,27 +4,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    cpp-lang = {
+      url = "path:/Users/ritzau/src/slask/aoc-nix/languages/cpp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, cpp-lang }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            gcc
-            clang
-            cmake
-            ninja
-          ];
-
-          shellHook = ''
-            echo "⚡ Hello C++ Environment"
-            echo "Run: g++ -std=c++20 -O2 hello.cpp -o hello-cpp"
-          '';
-        };
+        # Use the language flake's dev shell directly
+        devShells.default = cpp-lang.devShells.${system}.default;
 
         packages.default = pkgs.stdenv.mkDerivation {
           pname = "hello-cpp";
@@ -32,21 +26,17 @@
           src = ./.;
           nativeBuildInputs = [ pkgs.cmake pkgs.gcc ];
           buildPhase = ''
-            g++ -std=c++20 -O2 hello.cpp -o hello-cpp
+            cmake .
+            make
           '';
           installPhase = ''
-            mkdir -p $out/bin
-            cp hello-cpp $out/bin/
+            install -D hello-cpp $out/bin/hello-cpp
           '';
         };
 
         apps.default = {
           type = "app";
-          program = "${pkgs.writeShellScript "run-cpp" ''
-            cd ${./.}
-            ${pkgs.gcc}/bin/g++ -std=c++20 -O2 hello.cpp -o hello-cpp
-            ./hello-cpp
-          ''}";
+          program = "${self.packages.${system}.default}/bin/hello-cpp";
         };
       });
 }

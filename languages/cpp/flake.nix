@@ -19,7 +19,6 @@
             cmake
             ninja
             gdb
-            valgrind
             pkg-config
           ];
 

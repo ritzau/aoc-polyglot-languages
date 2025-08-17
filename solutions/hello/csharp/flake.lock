@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "cpp-lang": {
+    "csharp-lang": {
       "inputs": {
         "flake-utils": [
           "flake-utils"
@@ -10,13 +10,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1755475087,
-        "narHash": "sha256-rtCNF5PlyREANPJkuZjYmrI8gDb1RgZ32RwO6bCBbr8=",
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/cpp",
+        "lastModified": 1755474268,
+        "narHash": "sha256-MlRsgpRzFQ8OyR0JUElS2psTd8YBRHT/U7sJjqVW1sY=",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
         "type": "path"
       },
       "original": {
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/cpp",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
         "type": "path"
       }
     },
@@ -56,7 +56,7 @@
     },
     "root": {
       "inputs": {
-        "cpp-lang": "cpp-lang",
+        "csharp-lang": "csharp-lang",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       }
