@@ -18,7 +18,7 @@
             gopls
             golangci-lint
             gotools
-            air  # Live reload
+            air # Live reload
           ];
 
           shellHook = ''

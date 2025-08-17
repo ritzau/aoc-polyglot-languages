@@ -19,23 +19,23 @@
             direnv
             nix-direnv
             just
-            
+
             # Text editors and utilities
             vim
             curl
             wget
             jq
-            
+
             # Benchmarking and profiling
             hyperfine
             time
-            
+
             # Code formatting and linting
             pre-commit
-            clang-tools  # includes clang-format
+            clang-tools # includes clang-format
             nixpkgs-fmt
             nodePackages.prettier
-            
+
             # Build all script (compiled languages only)
             (writeShellScriptBin "build-all" ''
               echo "Building compiled AOC solutions..."

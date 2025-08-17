@@ -7,7 +7,11 @@
       "Bash(nix flake check:*)",
       "Bash(nix build:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(direnv reload:*)",
+      "Bash(just format)",
+      "Bash(nix develop:*)"
     ],
     "deny": [],
     "ask": []

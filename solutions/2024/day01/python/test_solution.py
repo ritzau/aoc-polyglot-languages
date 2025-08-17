@@ -10,8 +10,10 @@ EXAMPLE = """3   4
 3   9
 3   3"""
 
+
 def test_part1():
     assert solve_part1(EXAMPLE) == 11
+
 
 def test_part2():
     assert solve_part2(EXAMPLE) == 31

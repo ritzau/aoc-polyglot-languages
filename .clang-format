@@ -18,4 +18,4 @@ SpacesInSquareBrackets: false
 SpaceAfterCStyleCast: true
 PointerAlignment: Right
 DerivePointerAlignment: false
-Standard: c11
+Standard: Cpp11
