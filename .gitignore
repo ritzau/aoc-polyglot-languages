@@ -6,7 +6,6 @@ result-*
 # Language-specific ignores
 ## Rust
 target/
-Cargo.lock
 *.rs.bk
 
 ## Python
