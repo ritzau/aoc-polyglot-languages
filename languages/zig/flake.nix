@@ -49,10 +49,15 @@
               src = src;
               nativeBuildInputs = with pkgs; [ zig ];
               buildPhase = ''
+                # Set up temp directories for zig cache
+                export HOME=$TMPDIR
+                mkdir -p $TMPDIR/zig-cache
+                export ZIG_LOCAL_CACHE_DIR=$TMPDIR/zig-cache
+                export ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache
                 # Find .zig files and compile the first one found
                 zigfile=$(find . -maxdepth 1 -name "*.zig" | head -1)
                 if [ -n "$zigfile" ]; then
-                  zig build-exe "$zigfile" -femit-bin=${pname}
+                  zig build-exe "$zigfile" -femit-bin=${pname} --cache-dir $TMPDIR/zig-cache
                 else
                   echo "No .zig files found"
                   exit 1

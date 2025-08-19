@@ -3,11 +3,9 @@
     "base": {
       "inputs": {
         "flake-utils": [
-          "zig-lang",
           "flake-utils"
         ],
         "nixpkgs": [
-          "zig-lang",
           "nixpkgs"
         ]
       },
@@ -58,7 +56,9 @@
     },
     "root": {
       "inputs": {
-        "zig-lang": "zig-lang"
+        "base": "base",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
@@ -74,23 +74,6 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
-      }
-    },
-    "zig-lang": {
-      "inputs": {
-        "base": "base",
-        "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1755600173,
-        "narHash": "sha256-FDdBmqqM0lboRa2GnqWY5+iF+lcFopxUlCdryS3mZ7M=",
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/zig",
-        "type": "path"
-      },
-      "original": {
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/zig",
-        "type": "path"
       }
     }
   },

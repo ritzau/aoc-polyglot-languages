@@ -4,25 +4,13 @@
 default:
     @just --list
 
-# Build the solution
+# Build the solution (via nix build)
 build:
-    @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
-        gradle build; \
-    elif [ -f pom.xml ]; then \
-        mvn compile; \
-    else \
-        javac *.java; \
-    fi
+    nix build
 
-# Run the solution
+# Run the solution (via nix run)
 run:
-    @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
-        gradle run; \
-    elif [ -f pom.xml ]; then \
-        mvn exec:java; \
-    else \
-        java Solution; \
-    fi
+    nix run
 
 # Run tests
 test:
@@ -43,6 +31,7 @@ clean:
     else \
         rm -f *.class; \
     fi
+    rm -rf result/
 
 # Lint code
 lint:

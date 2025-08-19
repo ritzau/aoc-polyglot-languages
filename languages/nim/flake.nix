@@ -50,6 +50,8 @@
               src = src;
               nativeBuildInputs = with pkgs; [ nim ];
               buildPhase = ''
+                # Set up temp directory for nim cache
+                export HOME=$TMPDIR
                 # Find .nim files and compile the first one found
                 nimfile=$(find . -maxdepth 1 -name "*.nim" | head -1)
                 if [ -n "$nimfile" ]; then
