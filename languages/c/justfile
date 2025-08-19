@@ -4,13 +4,13 @@
 default:
     @just --list
 
-# Build the solution
+# Build the solution (via nix build)
 build:
-    make
+    nix build
 
-# Run the solution
+# Run the solution (via nix run)
 run:
-    make run
+    nix run
 
 # Run tests
 test:
@@ -18,7 +18,8 @@ test:
 
 # Clean build artifacts
 clean:
-    make clean
+    make clean || true
+    rm -rf result/
 
 # Lint code
 lint:

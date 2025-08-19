@@ -6,5 +6,8 @@
   };
 
   outputs = { self, kotlin-lang }:
-    kotlin-lang.mkStandardOutputs { };
+    kotlin-lang.mkStandardOutputs {
+      src = ./.;
+      pname = "hello-kotlin";
+    };
 }

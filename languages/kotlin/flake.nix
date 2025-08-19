@@ -39,7 +39,37 @@
           };
         }) // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = args: flake-utils.lib.eachDefaultSystem (system:
-        self.lib.${system}.mkSolution args);
+      mkStandardOutputs = { src ? ./., pname ? "hello-kotlin", ... }@args:
+        flake-utils.lib.eachDefaultSystem (system:
+          let
+            pkgs = self.lib.${system}.pkgs;
+            # Default package that uses gradle build
+            defaultPackage = pkgs.stdenv.mkDerivation {
+              pname = pname;
+              version = "0.1.0";
+              src = src;
+              nativeBuildInputs = with pkgs; [ jdk21 kotlin ];
+              buildPhase = ''
+                # Compile Kotlin source to jar
+                find src -name "*.kt" -exec kotlinc {} -include-runtime -d ${pname}.jar \;
+              '';
+              installPhase = ''
+                                mkdir -p $out/bin
+                                # Create executable wrapper script
+                                cat > $out/bin/${pname} << EOF
+                #!/bin/sh
+                exec java -jar \$(dirname "\$0")/${pname}.jar "\$@"
+                EOF
+                                chmod +x $out/bin/${pname}
+                                # Copy jar file
+                                cp ${pname}.jar $out/bin/
+              '';
+            };
+            # Remove src and pname from args to pass to mkSolution
+            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+          in
+          self.lib.${system}.mkSolution ({
+            package = defaultPackage;
+          } // cleanArgs));
     };
 }

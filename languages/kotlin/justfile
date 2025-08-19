@@ -4,52 +4,38 @@
 default:
     @just --list
 
-# Build the solution
+# Build the solution (via nix build)
 build:
-    @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
-        gradle build; \
-    else \
-        kotlinc *.kt -include-runtime -d solution.jar; \
-    fi
+    nix build
 
-# Run the solution
+# Run the solution (via nix run)
 run:
-    @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
-        gradle run; \
-    elif [ -f solution.jar ]; then \
-        java -jar solution.jar; \
-    else \
-        kotlin solution.kt; \
-    fi
+    nix run
 
-# Run tests
+# Run tests (via gradle if available)
 test:
     @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
         gradle test; \
     else \
-        echo "No test framework configured"; \
+        echo "No test framework configured for pure kotlinc builds"; \
     fi
 
 # Clean build artifacts
 clean:
-    @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
-        gradle clean; \
-    else \
-        rm -f *.jar *.class; \
-    fi
+    rm -rf result/ build/ *.jar *.class
 
-# Lint code
+# Lint code (via gradle if available)
 lint:
     @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
         gradle ktlintCheck; \
     else \
-        echo "No linter configured"; \
+        echo "No linter configured for pure kotlinc builds"; \
     fi
 
-# Format code
+# Format code (via gradle if available)
 format:
     @if [ -f build.gradle ] || [ -f build.gradle.kts ]; then \
         gradle ktlintFormat; \
     else \
-        echo "No formatter configured"; \
+        echo "No formatter configured for pure kotlinc builds"; \
     fi
