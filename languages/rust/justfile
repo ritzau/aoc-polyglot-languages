@@ -19,7 +19,7 @@ test:
 # Clean build artifacts
 clean:
     cargo clean
-    rm -rf result/
+    rm -f result
 
 # Lint code
 lint:

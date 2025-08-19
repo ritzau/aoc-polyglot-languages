@@ -1,4 +1,4 @@
-# TypeScript AOC Development Commands
+# C# AOC Development Commands
 
 # Show available commands
 default:
@@ -14,17 +14,16 @@ run:
 
 # Run tests
 test:
-    npm test
+    dotnet test
 
 # Clean build artifacts
 clean:
-    rm -rf node_modules/ *.js
-    rm -f result
+    rm -rf bin/ obj/ *.exe && rm -f result
 
 # Lint code
 lint:
-    eslint hello.ts
+    echo "C# linting would go here"
 
 # Format code
 format:
-    prettier --write hello.ts
+    dotnet format

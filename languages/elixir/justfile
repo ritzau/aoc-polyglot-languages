@@ -19,7 +19,8 @@ test:
 # Clean build artifacts
 clean:
     mix clean
-    rm -rf _build/ deps/ result/
+    rm -rf _build/ deps/
+    rm -f result
 
 # Lint code
 lint:

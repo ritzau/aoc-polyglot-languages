@@ -18,7 +18,8 @@
       "WebFetch(domain:just.systems)",
       "Bash(nix flake update:*)",
       "Bash(cd:*)",
-      "Bash(nix run)"
+      "Bash(nix run)",
+      "Bash(nix search:*)"
     ],
     "deny": [],
     "ask": [],

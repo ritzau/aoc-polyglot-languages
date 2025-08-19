@@ -1,4 +1,4 @@
-# TypeScript AOC Development Commands
+# D AOC Development Commands
 
 # Show available commands
 default:
@@ -14,17 +14,16 @@ run:
 
 # Run tests
 test:
-    npm test
+    dub test
 
 # Clean build artifacts
 clean:
-    rm -rf node_modules/ *.js
-    rm -f result
+    rm -rf *.o dub.selections.json .dub/ && rm -f result
 
 # Lint code
 lint:
-    eslint hello.ts
+    echo "D linting would go here"
 
 # Format code
 format:
-    prettier --write hello.ts
+    echo "D formatting would go here"

@@ -1,34 +1,11 @@
 {
   description = "Hello World Swift";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    swift-lang.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/swift";
   };
-
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            swift
-            swiftPackages.Foundation
-          ];
-
-          shellHook = ''
-            echo "🦉 Hello Swift Environment"
-            echo "Run: swift hello.swift"
-          '';
-        };
-
-        apps.default = {
-          type = "app";
-          program = "${pkgs.writeShellScript "run-swift" ''
-            ${pkgs.swift}/bin/swift ${./hello.swift}
-          ''}";
-        };
-      });
+  outputs = { self, swift-lang }:
+    swift-lang.mkStandardOutputs {
+      src = ./.;
+      pname = "hello-swift";
+    };
 }

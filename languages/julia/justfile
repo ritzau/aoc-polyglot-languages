@@ -1,4 +1,4 @@
-# TypeScript AOC Development Commands
+# Julia AOC Development Commands
 
 # Show available commands
 default:
@@ -14,17 +14,17 @@ run:
 
 # Run tests
 test:
-    npm test
+    julia --project=. -e "using Pkg; Pkg.test()"
 
 # Clean build artifacts
 clean:
-    rm -rf node_modules/ *.js
+    rm -rf Manifest.toml .julia/
     rm -f result
 
 # Lint code
 lint:
-    eslint hello.ts
+    echo "Julia linting would go here"
 
 # Format code
 format:
-    prettier --write hello.ts
+    julia -e "using JuliaFormatter; format(\".\")" || echo "JuliaFormatter not available"

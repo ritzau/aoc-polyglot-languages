@@ -31,7 +31,7 @@ clean:
     else \
         rm -f *.class; \
     fi
-    rm -rf result/
+    rm -f result
 
 # Lint code
 lint:

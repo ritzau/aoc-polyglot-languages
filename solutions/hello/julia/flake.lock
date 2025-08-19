@@ -3,11 +3,11 @@
     "base": {
       "inputs": {
         "flake-utils": [
-          "csharp-lang",
+          "julia-lang",
           "flake-utils"
         ],
         "nixpkgs": [
-          "csharp-lang",
+          "julia-lang",
           "nixpkgs"
         ]
       },
@@ -19,23 +19,6 @@
       },
       "original": {
         "path": "/Users/ritzau/src/slask/aoc-nix/languages/base",
-        "type": "path"
-      }
-    },
-    "csharp-lang": {
-      "inputs": {
-        "base": "base",
-        "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1755611934,
-        "narHash": "sha256-nYxTlQ+r+iCHm3AWTnyDWY7n8sBA+9PmsQFhca3+hfU=",
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
-        "type": "path"
-      },
-      "original": {
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
         "type": "path"
       }
     },
@@ -57,6 +40,23 @@
         "type": "github"
       }
     },
+    "julia-lang": {
+      "inputs": {
+        "base": "base",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1755613533,
+        "narHash": "sha256-N9pRqC6AHcqTNRuSw5GU266dDepCpwZHcQd9hL3Z6EQ=",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/julia",
+        "type": "path"
+      },
+      "original": {
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/julia",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1755186698,
@@ -75,7 +75,7 @@
     },
     "root": {
       "inputs": {
-        "csharp-lang": "csharp-lang"
+        "julia-lang": "julia-lang"
       }
     },
     "systems": {

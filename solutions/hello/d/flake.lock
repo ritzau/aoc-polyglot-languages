@@ -3,11 +3,11 @@
     "base": {
       "inputs": {
         "flake-utils": [
-          "csharp-lang",
+          "d-lang",
           "flake-utils"
         ],
         "nixpkgs": [
-          "csharp-lang",
+          "d-lang",
           "nixpkgs"
         ]
       },
@@ -22,20 +22,20 @@
         "type": "path"
       }
     },
-    "csharp-lang": {
+    "d-lang": {
       "inputs": {
         "base": "base",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1755611934,
-        "narHash": "sha256-nYxTlQ+r+iCHm3AWTnyDWY7n8sBA+9PmsQFhca3+hfU=",
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
+        "lastModified": 1755611771,
+        "narHash": "sha256-ZnOLs2Ao6ZZi4Rr3dcEL5IAAEcG9qTEvZb2467mnrtQ=",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/d",
         "type": "path"
       },
       "original": {
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/d",
         "type": "path"
       }
     },
@@ -75,7 +75,7 @@
     },
     "root": {
       "inputs": {
-        "csharp-lang": "csharp-lang"
+        "d-lang": "d-lang"
       }
     },
     "systems": {

@@ -22,7 +22,8 @@ test:
 
 # Clean build artifacts
 clean:
-    rm -rf result/ build/ *.jar *.class
+    rm -rf build/ *.jar *.class
+    rm -f result
 
 # Lint code (via gradle if available)
 lint:

@@ -24,7 +24,8 @@ test:
 
 # Clean build artifacts
 clean:
-    rm -rf build/ result/ solution *.o
+    rm -rf build/ solution *.o
+    rm -f result
     make clean || true
 
 # Lint code

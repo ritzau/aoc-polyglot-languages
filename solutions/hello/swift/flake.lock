@@ -3,11 +3,11 @@
     "base": {
       "inputs": {
         "flake-utils": [
-          "csharp-lang",
+          "swift-lang",
           "flake-utils"
         ],
         "nixpkgs": [
-          "csharp-lang",
+          "swift-lang",
           "nixpkgs"
         ]
       },
@@ -19,23 +19,6 @@
       },
       "original": {
         "path": "/Users/ritzau/src/slask/aoc-nix/languages/base",
-        "type": "path"
-      }
-    },
-    "csharp-lang": {
-      "inputs": {
-        "base": "base",
-        "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1755611934,
-        "narHash": "sha256-nYxTlQ+r+iCHm3AWTnyDWY7n8sBA+9PmsQFhca3+hfU=",
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
-        "type": "path"
-      },
-      "original": {
-        "path": "/Users/ritzau/src/slask/aoc-nix/languages/csharp",
         "type": "path"
       }
     },
@@ -75,7 +58,24 @@
     },
     "root": {
       "inputs": {
-        "csharp-lang": "csharp-lang"
+        "swift-lang": "swift-lang"
+      }
+    },
+    "swift-lang": {
+      "inputs": {
+        "base": "base",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1755611881,
+        "narHash": "sha256-ppnnzVZpz3jBdjth/XGQkj5OawqyAd9T0YNPgqd+GgI=",
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/swift",
+        "type": "path"
+      },
+      "original": {
+        "path": "/Users/ritzau/src/slask/aoc-nix/languages/swift",
+        "type": "path"
       }
     },
     "systems": {
