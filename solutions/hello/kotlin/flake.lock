@@ -47,8 +47,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1755559336,
-        "narHash": "sha256-o+WJfrS1kqmSCeKWbmpPp5YVaEiCi0jy+LCMlb7qbDg=",
+        "lastModified": 1755595436,
+        "narHash": "sha256-OWhsxw5WyDBQcU/O+lQ2s/NGG+yur3ZWwWR4vYsHQvI=",
         "path": "/Users/ritzau/src/slask/aoc-nix/languages/kotlin",
         "type": "path"
       },

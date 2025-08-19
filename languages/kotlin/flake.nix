@@ -40,6 +40,6 @@
         }) // {
       # Complete solution outputs - eliminates all boilerplate
       mkStandardOutputs = args: flake-utils.lib.eachDefaultSystem (system:
-        self.lib.${system}.mkSolution (args or { }));
+        self.lib.${system}.mkSolution args);
     };
 }
