@@ -1,0 +1,7 @@
+# Hello World Scala - Import language commands
+import '../../../languages/scala/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Scala ==="
+    @just run

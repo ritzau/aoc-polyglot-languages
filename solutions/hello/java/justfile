@@ -1,0 +1,7 @@
+# Hello World Java - Import language commands
+import '../../../languages/java/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Java ==="
+    @just run

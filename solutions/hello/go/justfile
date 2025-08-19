@@ -1,0 +1,7 @@
+# Hello World Go - Import language commands
+import '../../../languages/go/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Go ==="
+    @just run

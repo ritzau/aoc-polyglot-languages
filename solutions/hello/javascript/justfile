@@ -1,0 +1,7 @@
+# Hello World JavaScript - Import language commands
+import '../../../languages/javascript/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World JavaScript ==="
+    @just run

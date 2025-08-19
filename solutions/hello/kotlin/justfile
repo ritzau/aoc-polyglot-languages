@@ -1,0 +1,7 @@
+# Hello World Kotlin - Import language commands
+import '../../../languages/kotlin/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Kotlin ==="
+    @just run

@@ -1,0 +1,7 @@
+# Hello World Nim - Import language commands
+import '../../../languages/nim/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Nim ==="
+    @just run
