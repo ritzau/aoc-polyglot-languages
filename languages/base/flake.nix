@@ -36,8 +36,6 @@
         mkSolution =
           { language
           , # Language name (e.g., "rust", "c", "cpp")
-            description ? ""
-          , # Solution description (optional)
             languageFlake
           , # The language flake to inherit from
             package ? null

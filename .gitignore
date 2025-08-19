@@ -72,6 +72,9 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 
+# JVM
+.gradle/
+
 # IDE
 .vscode/
 .idea/
