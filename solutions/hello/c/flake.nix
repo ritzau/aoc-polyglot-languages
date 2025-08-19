@@ -6,5 +6,8 @@
   };
 
   outputs = { self, c-lang }:
-    c-lang.mkStandardOutputs { };
+    c-lang.mkStandardOutputs {
+      src = ./.;
+      pname = "hello-c";
+    };
 }

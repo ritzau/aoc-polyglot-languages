@@ -42,26 +42,29 @@
           };
         }) // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = args: flake-utils.lib.eachDefaultSystem (system:
-        let
-          pkgs = self.lib.${system}.pkgs;
-          # Default package that uses just build
-          defaultPackage = pkgs.stdenv.mkDerivation {
-            pname = "hello-c";
-            version = "0.1.0";
-            src = ./.;
-            nativeBuildInputs = with pkgs; [ just gcc gnumake ];
-            buildPhase = ''
-              just build
-            '';
-            installPhase = ''
-              mkdir -p $out/bin
-              find . -name "hello-c" -executable -type f -exec cp {} $out/bin/ \;
-            '';
-          };
-        in
-        self.lib.${system}.mkSolution ({
-          package = defaultPackage;
-        } // args));
+      mkStandardOutputs = { src ? ./., pname ? "hello-c", ... }@args:
+        flake-utils.lib.eachDefaultSystem (system:
+          let
+            pkgs = self.lib.${system}.pkgs;
+            # Default package that uses just build
+            defaultPackage = pkgs.stdenv.mkDerivation {
+              pname = pname;
+              version = "0.1.0";
+              src = src;
+              nativeBuildInputs = with pkgs; [ just gcc gnumake ];
+              buildPhase = ''
+                just build
+              '';
+              installPhase = ''
+                mkdir -p $out/bin
+                find . -name "${pname}" -executable -type f -exec cp {} $out/bin/ \;
+              '';
+            };
+            # Remove src and pname from args to pass to mkSolution
+            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+          in
+          self.lib.${system}.mkSolution ({
+            package = defaultPackage;
+          } // cleanArgs));
     };
 }

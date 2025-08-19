@@ -29,8 +29,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1755596773,
-        "narHash": "sha256-W6XzWPkt3IYfIImH+4fQyaeCYP3R74TrkNO4To4SRgc=",
+        "lastModified": 1755597029,
+        "narHash": "sha256-fcQXTzwP51Ty4L/om2T5cuuoBg/rafjP27GkUYm03fk=",
         "path": "/Users/ritzau/src/slask/aoc-nix/languages/c",
         "type": "path"
       },
