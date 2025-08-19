@@ -53,7 +53,7 @@
               src = src;
               nativeBuildInputs = with pkgs; [ just gcc gnumake ];
               buildPhase = ''
-                just build
+                make
               '';
               installPhase = ''
                 mkdir -p $out/bin
