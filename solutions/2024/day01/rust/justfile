@@ -1,0 +1,31 @@
+# Day 1 Rust Solution
+# Import all standard Rust development commands
+import '../../../../languages/rust/justfile'
+
+# Solution-specific tasks can be added here
+
+# Run with example input (if available)
+run-example:
+    @if [ -f "example.txt" ]; then \
+        echo "Running with example input..."; \
+        cargo run < example.txt; \
+    else \
+        echo "No example.txt found"; \
+    fi
+
+# Run with actual input
+run-input:
+    cargo run < input
+
+# Compare example vs actual output
+compare:
+    @echo "=== Example Output ==="
+    @just run-example
+    @echo "\n=== Actual Output ==="
+    @just run-input
+
+# Submit solution (placeholder)
+submit:
+    @echo "Solution ready for submission!"
+    @echo "Output:"
+    @just run-input

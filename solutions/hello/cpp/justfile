@@ -1,0 +1,22 @@
+# Hello World C++
+# Import all standard C++ development commands
+import '../../../languages/cpp/justfile'
+
+# Hello-specific tasks
+
+# Run and show output clearly
+hello:
+    @echo "=== Hello World C++ ==="
+    @just run
+
+# Verify the output is correct
+verify:
+    @echo "Verifying hello world output..."
+    @just build > /dev/null 2>&1
+    @output=$(just run 2>/dev/null) && \
+    if [ "$output" = "Hello World!" ]; then \
+        echo "✅ Output correct: $output"; \
+    else \
+        echo "❌ Unexpected output: $output"; \
+        exit 1; \
+    fi

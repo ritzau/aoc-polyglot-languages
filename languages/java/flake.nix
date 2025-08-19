@@ -4,29 +4,27 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    base = {
+      url = "path:/Users/ritzau/src/slask/aoc-nix/languages/base";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, base }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        baseLib = base.lib.${system};
       in
       {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
+        devShells.default = baseLib.mkLanguageShell {
+          name = "Java";
+          emoji = "☕";
+          languageTools = with baseLib.pkgs; [
             jdk21
             gradle
             maven
           ];
-
-          shellHook = ''
-            echo "☕ Java AOC Environment"
-            echo "Available commands:"
-            echo "  javac Solution.java && java Solution"
-            echo "  gradle run"
-            echo "  mvn compile exec:java"
-            echo "  java --version: $(java --version | head -1)"
-          '';
         };
       });
 }

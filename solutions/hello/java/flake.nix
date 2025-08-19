@@ -4,24 +4,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    java-lang = {
+      url = "path:/Users/ritzau/src/slask/aoc-nix/languages/java";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, java-lang }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            jdk21
-          ];
-
-          shellHook = ''
-            echo "☕ Hello Java Environment"
-            echo "Run: javac Hello.java && java Hello"
-          '';
-        };
+        # Use the language flake's dev shell directly
+        devShells.default = java-lang.devShells.${system}.default;
 
         apps.default = {
           type = "app";

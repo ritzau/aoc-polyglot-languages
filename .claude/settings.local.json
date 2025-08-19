@@ -12,7 +12,13 @@
       "Bash(direnv reload:*)",
       "Bash(just format)",
       "Bash(nix develop:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(just:*)",
+      "WebSearch",
+      "WebFetch(domain:just.systems)",
+      "Bash(nix flake update:*)",
+      "Bash(cd:*)",
+      "Bash(nix run)"
     ],
     "deny": [],
     "ask": []

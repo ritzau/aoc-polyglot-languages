@@ -4,32 +4,31 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    base = {
+      url = "path:/Users/ritzau/src/slask/aoc-nix/languages/base";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, base }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        baseLib = base.lib.${system};
       in
       {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
+        devShells.default = baseLib.mkLanguageShell {
+          name = "C++";
+          emoji = "⚡";
+          languageTools = with baseLib.pkgs; [
             gcc
             clang
             cmake
             ninja
             gdb
             pkg-config
+            clang-tools # includes clang-format and clang-tidy
           ];
-
-          shellHook = ''
-            echo "⚡ C++ AOC Environment"
-            echo "Available commands:"
-            echo "  g++ -std=c++20 -O2 solution.cpp -o solution"
-            echo "  clang++ -std=c++20 -O2 solution.cpp -o solution"
-            echo "  cmake . && make"
-            echo "  gdb ./solution"
-          '';
         };
       });
 }

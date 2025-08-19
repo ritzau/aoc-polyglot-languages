@@ -27,15 +27,12 @@
             cargo-edit
             cargo-generate
             bacon
+            just
           ];
 
           shellHook = ''
             echo "🦀 Rust AOC Environment"
-            echo "Available commands:"
-            echo "  cargo run           - Run the solution"
-            echo "  cargo test          - Run tests"
-            echo "  cargo watch -x run  - Watch and run on changes"
-            echo "  bacon               - Background code checker"
+            echo "Use 'just --list' to see available commands"
           '';
         };
       });

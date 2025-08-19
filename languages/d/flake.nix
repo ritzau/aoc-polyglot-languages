@@ -14,18 +14,15 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            dmd
             ldc
             dub
             gdb
           ];
 
           shellHook = ''
-            echo "🎯 D AOC Environment"
+            echo "🎯 D AOC Environment (LDC only)"
             echo "Available commands:"
-            echo "  dmd solution.d"
             echo "  ldc2 solution.d"
-            echo "  rdmd solution.d"
             echo "  dub run"
           '';
         };
