@@ -1,33 +1,11 @@
 {
   description = "Hello World Tcl";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    tcl-lang.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/tcl";
   };
-
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            tcl
-            tk
-          ];
-
-          shellHook = ''
-            echo "🎭 Hello Tcl Environment"
-            echo "Run: tclsh hello.tcl"
-          '';
-        };
-
-        apps.default = {
-          type = "app";
-          program = "${pkgs.tcl}/bin/tclsh";
-          args = [ "${./hello.tcl}" ];
-        };
-      });
+  outputs = { self, tcl-lang }:
+    tcl-lang.mkStandardOutputs {
+      src = ./.;
+      pname = "hello-tcl";
+    };
 }

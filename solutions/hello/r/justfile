@@ -1,0 +1,7 @@
+# Hello World R - Import language commands
+import '../../../languages/r/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World R ==="
+    @just run

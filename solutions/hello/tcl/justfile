@@ -1,0 +1,7 @@
+# Hello World Tcl - Import language commands
+import '../../../languages/tcl/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Tcl ==="
+    @just run

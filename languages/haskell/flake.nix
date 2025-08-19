@@ -16,7 +16,7 @@
       (system:
         let
           baseLib = base.lib.${system};
-          haskellPackages = baseLib.pkgs.haskell.packages.ghc964;
+          haskellPackages = baseLib.pkgs.haskellPackages;
         in
         {
           devShells.default = baseLib.mkLanguageShell {

@@ -1,0 +1,7 @@
+# Hello World COBOL - Import language commands
+import '../../../languages/cobol/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World COBOL ==="
+    @just run

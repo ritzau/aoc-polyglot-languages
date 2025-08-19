@@ -1,0 +1,7 @@
+# Hello World Perl - Import language commands
+import '../../../languages/perl/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Perl ==="
+    @just run

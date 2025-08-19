@@ -1,0 +1,7 @@
+# Hello World Clojure - Import language commands
+import '../../../languages/clojure/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Clojure ==="
+    @just run

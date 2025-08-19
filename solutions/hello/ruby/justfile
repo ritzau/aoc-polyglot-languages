@@ -1,0 +1,7 @@
+# Hello World Ruby - Import language commands
+import '../../../languages/ruby/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Ruby ==="
+    @just run

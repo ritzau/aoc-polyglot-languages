@@ -1,0 +1,7 @@
+# Hello World Smalltalk - Import language commands
+import '../../../languages/smalltalk/justfile'
+
+# Solution-specific commands
+hello:
+    @echo "=== Hello World Smalltalk ==="
+    @just run
