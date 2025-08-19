@@ -1,4 +1,4 @@
-# Rust AOC Development Commands
+# Go AOC Development Commands
 
 # Show available commands
 default:
@@ -14,17 +14,17 @@ run:
 
 # Run tests
 test:
-    cargo test
+    go test ./...
 
 # Clean build artifacts
 clean:
-    cargo clean
+    go clean
     rm -rf result/
 
 # Lint code
 lint:
-    cargo clippy
+    golangci-lint run
 
 # Format code
 format:
-    cargo fmt
+    go fmt ./...

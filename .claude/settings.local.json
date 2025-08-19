@@ -21,6 +21,9 @@
       "Bash(nix run)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "/nix/store/dcvmmnw48wl7rja094lnbxqnnng4p6ac-hello-cpp-0.1.0/bin"
+    ]
   }
 }
