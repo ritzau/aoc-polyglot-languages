@@ -6,6 +6,5 @@
   };
 
   outputs = { self, kotlin-lang }:
-    kotlin-lang.inputs.flake-utils.lib.eachDefaultSystem (system:
-      kotlin-lang.lib.${system}.mkSolution { });
+    kotlin-lang.mkStandardOutputs { };
 }
