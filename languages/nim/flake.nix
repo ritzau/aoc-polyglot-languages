@@ -50,7 +50,14 @@
               src = src;
               nativeBuildInputs = with pkgs; [ nim ];
               buildPhase = ''
-                nim c --out:${pname} hello.nim
+                # Find .nim files and compile the first one found
+                nimfile=$(find . -maxdepth 1 -name "*.nim" | head -1)
+                if [ -n "$nimfile" ]; then
+                  nim c --out:${pname} "$nimfile"
+                else
+                  echo "No .nim files found"
+                  exit 1
+                fi
               '';
               installPhase = ''
                 mkdir -p $out/bin

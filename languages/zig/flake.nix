@@ -49,7 +49,14 @@
               src = src;
               nativeBuildInputs = with pkgs; [ zig ];
               buildPhase = ''
-                zig build-exe hello.zig -femit-bin=${pname}
+                # Find .zig files and compile the first one found
+                zigfile=$(find . -maxdepth 1 -name "*.zig" | head -1)
+                if [ -n "$zigfile" ]; then
+                  zig build-exe "$zigfile" -femit-bin=${pname}
+                else
+                  echo "No .zig files found"
+                  exit 1
+                fi
               '';
               installPhase = ''
                 mkdir -p $out/bin
