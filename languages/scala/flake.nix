@@ -64,8 +64,9 @@
               '';
               installPhase = ''
                                 mkdir -p $out/bin
-                                # Find main class and create executable wrapper
-                                mainclass=$(find . -maxdepth 1 -name "*.class" | head -1 | sed 's/.*\///' | sed 's/\.class$//')
+                                # Find Scala source file and extract object name
+                                scalafile=$(find . -maxdepth 1 -name "*.scala" | head -1)
+                                mainclass=$(grep -o "object [A-Za-z0-9_]*" "$scalafile" | head -1 | cut -d' ' -f2)
                                 if [ -n "$mainclass" ]; then
                                   cat > $out/bin/${pname} << EOF
                 #!/bin/sh
