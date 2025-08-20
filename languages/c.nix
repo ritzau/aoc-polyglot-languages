@@ -19,10 +19,11 @@
       if justfilePath != null then
         ''
           export JUSTFILE_C="${justfilePath}"
-          # Create a language justfile that can be imported
-          if [ ! -f .justfile-c ]; then
-            cp "${justfilePath}" .justfile-c
-            echo "📋 Created .justfile-c from language definition"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/c.justfile ]; then
+            ln -sf "${justfilePath}" .cache/c.justfile
+            echo "📋 Linked .cache/c.justfile to language definition"
           fi
         ''
       else
