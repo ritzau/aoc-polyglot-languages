@@ -188,4 +188,35 @@
         exec java -jar ${pname}.jar "$@"
       '';
     };
+
+  # For Kotlin compilation and JAR creation
+  kotlinBuild =
+    {
+      mainClass ? "HelloKt",
+    }:
+    {
+      pkgs,
+      src ? ./.,
+      pname,
+      ...
+    }@args:
+    pkgs.writeShellApplication {
+      name = pname;
+      runtimeInputs = [
+        pkgs.kotlin
+        pkgs.jdk21
+      ];
+      text = ''
+        # Create temporary directory for compilation
+        tmpdir=$(mktemp -d)
+        cp -r ${src}/* "$tmpdir/"
+        cd "$tmpdir"
+
+        # Find and compile Kotlin files
+        find . -name "*.kt" -exec kotlinc {} -include-runtime -d ${pname}.jar \;
+
+        # Run the JAR
+        exec java -jar ${pname}.jar "$@"
+      '';
+    };
 }

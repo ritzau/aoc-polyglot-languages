@@ -31,10 +31,8 @@ let
     args:
     base.mkSolution {
       language = "kotlin";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.kotlin;
-        fileExtensions = [ "kt" ];
-        compileCmd = "kotlinc *.kt -include-runtime -d hello-kotlin.jar";
+      package = base.buildFunctions.kotlinBuild {
+        mainClass = "HelloKt";
       } (args // { pkgs = pkgs; });
     };
 in
