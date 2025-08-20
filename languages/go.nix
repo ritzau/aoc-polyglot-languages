@@ -4,7 +4,7 @@
   justfilePath ? null,
 }:
 {
-  devShell = base.mkLanguageShell {
+  devShells.default = base.mkLanguageShell {
     name = "Go";
     emoji = "🐹";
     languageTools = with pkgs; [
