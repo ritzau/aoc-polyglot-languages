@@ -181,10 +181,10 @@
         cd "$tmpdir"
 
         # Compile all Java files
-        javac *.java
+        javac ./*.java
 
         # Create and run JAR
-        jar cfe ${pname}.jar ${mainClass} *.class
+        jar cfe ${pname}.jar ${mainClass} ./*.class
         exec java -jar ${pname}.jar "$@"
       '';
     };
