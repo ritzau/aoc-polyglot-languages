@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Ada";
     emoji = "🏛️";
@@ -26,7 +26,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "ada";
@@ -60,4 +60,7 @@
         // buildArgs
       ) args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

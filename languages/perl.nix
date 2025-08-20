@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Perl";
     emoji = "🐪";
@@ -25,7 +25,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "perl";
@@ -44,4 +44,7 @@
         '';
       };
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

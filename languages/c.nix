@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "C";
     emoji = "🔧";
@@ -30,12 +30,20 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "c";
       package = base.buildFunctions.makeBuild {
         buildInputs = with pkgs; [ gcc ];
       } args;
+    };
+in
+{
+  mkStandardOutputs =
+    args:
+    (solution args)
+    // {
+      devShells.default = devShell;
     };
 }

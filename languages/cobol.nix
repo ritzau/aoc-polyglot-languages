@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "COBOL";
     emoji = "🏢";
@@ -25,7 +25,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "cobol";
@@ -47,4 +47,7 @@
         '';
       };
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

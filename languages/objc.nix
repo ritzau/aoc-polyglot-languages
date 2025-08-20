@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Objective-C";
     emoji = "🍎";
@@ -27,7 +27,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "objc";
@@ -56,4 +56,7 @@
         '';
       };
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

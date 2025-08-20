@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Lua";
     emoji = "🌙";
@@ -25,7 +25,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "lua";
@@ -34,4 +34,7 @@
         fileExtensions = [ "lua" ];
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

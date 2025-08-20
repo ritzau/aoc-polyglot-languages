@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Kotlin";
     emoji = "🟣";
@@ -27,7 +27,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "kotlin";
@@ -37,4 +37,7 @@
         compileCmd = "kotlinc *.kt -include-runtime -d hello-kotlin.jar";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Clojure";
     emoji = "🔁";
@@ -26,7 +26,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "clojure";
@@ -37,4 +37,7 @@
         runtimeInputs = [ pkgs.openjdk ];
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

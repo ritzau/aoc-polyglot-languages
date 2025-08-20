@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Fortran";
     emoji = "🏗️";
@@ -25,7 +25,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "fortran";
@@ -39,4 +39,7 @@
         compileCmd = "gfortran *.f90 -o hello-fortran || gfortran *.f95 -o hello-fortran || gfortran *.f -o hello-fortran";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

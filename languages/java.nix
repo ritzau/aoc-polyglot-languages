@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Java";
     emoji = "☕";
@@ -27,7 +27,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "java";
@@ -37,4 +37,7 @@
         compileCmd = "javac *.java && jar cfe hello-java.jar Main *.class";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

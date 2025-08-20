@@ -5,8 +5,7 @@
 }:
 let
   python = pkgs.python311;
-in
-{
+
   devShell = base.mkLanguageShell {
     name = "Python";
     emoji = "🐍";
@@ -37,7 +36,7 @@ in
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "python";
@@ -45,5 +44,13 @@ in
         interpreter = python;
         fileExtensions = [ "py" ];
       } args;
+    };
+in
+{
+  mkStandardOutputs =
+    args:
+    (solution args)
+    // {
+      devShells.default = devShell;
     };
 }

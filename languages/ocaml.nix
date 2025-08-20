@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "OCaml";
     emoji = "🐫";
@@ -26,7 +26,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "ocaml";
@@ -36,4 +36,7 @@
         compileCmd = "ocamlc -o hello-ocaml *.ml";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

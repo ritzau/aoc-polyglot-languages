@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Rust";
     emoji = "🦀";
@@ -29,7 +29,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "rust";
@@ -43,5 +43,13 @@
           // buildArgs
         )
       ) args;
+    };
+in
+{
+  mkStandardOutputs =
+    args:
+    (solution args)
+    // {
+      devShells.default = devShell;
     };
 }

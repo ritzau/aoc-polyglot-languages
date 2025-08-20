@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Zig";
     emoji = "⚡";
@@ -26,7 +26,7 @@
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "zig";
@@ -36,4 +36,7 @@
         compileCmd = "export HOME=$TMPDIR ZIG_LOCAL_CACHE_DIR=$TMPDIR/zig-cache ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache && mkdir -p $TMPDIR/zig-cache && zig build-exe *.zig -femit-bin=hello-zig --cache-dir $TMPDIR/zig-cache";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }

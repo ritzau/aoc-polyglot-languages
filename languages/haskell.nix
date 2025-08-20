@@ -5,8 +5,7 @@
 }:
 let
   haskellPackages = pkgs.haskellPackages;
-in
-{
+
   devShell = base.mkLanguageShell {
     name = "Haskell";
     emoji = "λ";
@@ -33,7 +32,7 @@ in
         "";
   };
 
-  mkStandardOutputs =
+  solution =
     args:
     base.mkSolution {
       language = "haskell";
@@ -43,4 +42,7 @@ in
         compileCmd = "ghc -o hello-haskell *.hs";
       } args;
     };
+in
+{
+  mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
 }
