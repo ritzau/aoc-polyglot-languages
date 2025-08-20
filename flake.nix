@@ -145,21 +145,22 @@
             inherit pkgs;
             base = baseLib;
           };
-          smalltalk = import ./languages/smalltalk.nix {
-            inherit pkgs;
-            base = baseLib;
-          };
           tcl = import ./languages/tcl.nix {
             inherit pkgs;
             base = baseLib;
           };
         }
         // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
+          # Linux-only languages due to package availability
           julia = import ./languages/julia.nix {
             inherit pkgs;
             base = baseLib;
           };
           objc = import ./languages/objc.nix {
+            inherit pkgs;
+            base = baseLib;
+          };
+          smalltalk = import ./languages/smalltalk.nix {
             inherit pkgs;
             base = baseLib;
           };
