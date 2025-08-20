@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   base,
   justfilePath ? null,
@@ -44,6 +45,6 @@
       ) args;
     }
     // {
-      devShells.default = devShell;
+      devShells.default = self.devShell;
     };
 }
