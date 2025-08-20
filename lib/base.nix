@@ -1,5 +1,5 @@
 { pkgs }:
-{
+let
   # Universal tools available in all language environments
   universalTools = with pkgs; [
     # Build and task management
@@ -33,6 +33,10 @@
     delta # Better git diff
     hyperfine # Benchmarking tool
   ];
+in
+{
+  # Export universalTools
+  inherit universalTools;
 
   # Create a dev shell with language-specific tools
   mkLanguageShell =
@@ -96,34 +100,33 @@
             { }
         );
 
-      result = {
-        # Always provide checks for nix flake check
-        checks = defaultChecks // checks;
-      }
-      // (
-        if package != null then
-          {
-            packages.default = package;
-          }
-        else
-          { }
-      )
-      // (
-        if (app != null || defaultApp != null) then
-          {
-            apps.default = if app != null then app else defaultApp;
-          }
-        else
-          { }
-      )
-      // (
-        if formatter != null then
-          {
-            formatter = formatter;
-          }
-        else
-          { }
-      );
     in
-    result;
+    {
+      # Always provide checks for nix flake check
+      checks = defaultChecks // checks;
+    }
+    // (
+      if package != null then
+        {
+          packages.default = package;
+        }
+      else
+        { }
+    )
+    // (
+      if (app != null || defaultApp != null) then
+        {
+          apps.default = if app != null then app else defaultApp;
+        }
+      else
+        { }
+    )
+    // (
+      if formatter != null then
+        {
+          formatter = formatter;
+        }
+      else
+        { }
+    );
 }
