@@ -101,10 +101,6 @@
             inherit pkgs;
             base = baseLib;
           };
-          julia = import ./languages/julia.nix {
-            inherit pkgs;
-            base = baseLib;
-          };
           objc = import ./languages/objc.nix {
             inherit pkgs;
             base = baseLib;
@@ -158,6 +154,12 @@
             base = baseLib;
           };
           tcl = import ./languages/tcl.nix {
+            inherit pkgs;
+            base = baseLib;
+          };
+        }
+        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
+          julia = import ./languages/julia.nix {
             inherit pkgs;
             base = baseLib;
           };
