@@ -219,4 +219,37 @@
         exec java -jar ${pname}.jar "$@"
       '';
     };
+
+  # For Scala compilation and JAR creation
+  scalaBuild =
+    {
+      mainClass ? "Hello",
+    }:
+    {
+      pkgs,
+      src ? ./.,
+      pname,
+      ...
+    }@args:
+    pkgs.writeShellApplication {
+      name = pname;
+      runtimeInputs = [
+        pkgs.scala
+        pkgs.jdk21
+        pkgs.which
+      ];
+      text = ''
+        # Create temporary directory for compilation
+        tmpdir=$(mktemp -d)
+        cp -r ${src}/* "$tmpdir/"
+        cd "$tmpdir"
+
+        # Compile all Scala files
+        scalac ./*.scala
+
+        # Create and run JAR
+        jar cfe ${pname}.jar ${mainClass} ./*.class
+        exec java -jar ${pname}.jar "$@"
+      '';
+    };
 }

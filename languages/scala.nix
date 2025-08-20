@@ -31,10 +31,8 @@ let
     args:
     base.mkSolution {
       language = "scala";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.scala;
-        fileExtensions = [ "scala" ];
-        compileCmd = "scalac *.scala && jar cfe hello-scala.jar Main *.class";
+      package = base.buildFunctions.scalaBuild {
+        mainClass = "Hello";
       } (args // { pkgs = pkgs; });
     };
 in
