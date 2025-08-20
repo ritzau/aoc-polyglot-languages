@@ -2,7 +2,7 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (18)
+## ✅ Working Languages (21)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
@@ -16,6 +16,8 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **Fortran** | ✅ Working | "Hello, World from Fortran! 🏗️" |
 | **Go**      | ✅ Working | "Hello, World from Go! 🐹"      |
 | **Haskell** | ✅ Working | "Hello, World from Haskell! λ"  |
+| **Java**    | ✅ Working | "Hello, World from Java! ☕"    |
+| **Kotlin**  | ✅ Working | "Hello, World from Kotlin! 🎯"  |
 | **Lisp**    | ✅ Working | "Hello, World from Lisp! 🔥"    |
 | **OCaml**   | ✅ Working | "Hello, World from OCaml! 🐫"   |
 | **Perl**    | ✅ Working | "Hello, World from Perl! 🐪"    |
@@ -23,11 +25,12 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **R**       | ✅ Working | "Hello, World from R! 📊"       |
 | **Ruby**    | ✅ Working | "Hello, World from Ruby! 💎"    |
 | **Rust**    | ✅ Working | "Hello, World from Rust! 🦀"    |
+| **Scala**   | ✅ Working | "Hello, World from Scala! 🎭"   |
 | **Swift**   | ✅ Working | "Hello, World from Swift! 🦉"   |
 | **Tcl**     | ✅ Working | "Hello, World from Tcl! 🪶"     |
 | **Zig**     | ✅ Working | "Hello, World from Zig! ⚡"     |
 
-## ❌ Known Issues (15)
+## ❌ Known Issues (12)
 
 ### Linux-Only Languages (3)
 
@@ -39,7 +42,7 @@ These languages are only available on Linux platforms:
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
-### Build Configuration Issues (12)
+### Build Configuration Issues (9)
 
 These languages have build or runtime configuration problems:
 
@@ -49,13 +52,10 @@ These languages have build or runtime configuration problems:
 | **C#**         | Binary format issue    | `Exec format error`                                             |
 | **COBOL**      | Build failure          | gnucobol documentation build failed                             |
 | **Dart**       | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Java**       | Compilation issue      | `No executable found`                                           |
 | **JavaScript** | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Kotlin**     | REPL deprecated        | `Kotlin REPL is deprecated`                                     |
 | **Lua**        | Missing name parameter | `writeShellApplication called without required argument 'name'` |
 | **Nim**        | Cache directory issue  | `cannot create directory: /homeless-shelter/.cache/nim`         |
 | **Python**     | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Scala**      | Missing dependencies   | `which: command not found` / `jar: command not found`           |
 | **TypeScript** | Missing Node.js        | `node: command not found`                                       |
 
 ## Testing Information
@@ -63,9 +63,9 @@ These languages have build or runtime configuration problems:
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 18 (55%)
-- **Known Issues:** 15 (45%)
-- **Success Rate:** 55%
+- **Working:** 21 (64%)
+- **Known Issues:** 12 (36%)
+- **Success Rate:** 64%
 
 **Test Environment:**
 
