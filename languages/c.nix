@@ -19,6 +19,11 @@
       if justfilePath != null then
         ''
           export JUSTFILE_C="${justfilePath}"
+          # Create a language justfile that can be imported
+          if [ ! -f .justfile-c ]; then
+            cp "${justfilePath}" .justfile-c
+            echo "📋 Created .justfile-c from language definition"
+          fi
         ''
       else
         "";
