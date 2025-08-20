@@ -59,7 +59,6 @@
   buildSystem =
     buildFn:
     {
-      pkgs,
       src ? ./.,
       pname,
       ...
@@ -67,7 +66,7 @@
     buildFn (
       args
       // {
-        inherit pkgs src pname;
+        inherit src pname;
         version = "0.1.0";
       }
     );
