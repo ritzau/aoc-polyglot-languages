@@ -1,8 +1,88 @@
 # Language Support Status
 
-This document tracks the current language support status and lists potential languages for future implementation.
+This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## Currently Supported Languages (33)
+## ✅ Working Languages (14)
+
+These languages are fully functional and ready for Advent of Code challenges:
+
+| Language    | Status     | Test Result                     |
+| ----------- | ---------- | ------------------------------- |
+| **C**       | ✅ Working | "Hello, World from C! 🔧"       |
+| **C++**     | ✅ Working | "Hello, World from C++! ⚡"     |
+| **D**       | ✅ Working | "Hello, World from D! 🎯"       |
+| **Elixir**  | ✅ Working | "Hello, World from Elixir! 💧"  |
+| **Fortran** | ✅ Working | "Hello, World from Fortran! 🏗️" |
+| **Go**      | ✅ Working | "Hello, World from Go! 🐹"      |
+| **Haskell** | ✅ Working | "Hello, World from Haskell! λ"  |
+| **OCaml**   | ✅ Working | "Hello, World from OCaml! 🐫"   |
+| **Perl**    | ✅ Working | "Hello, World from Perl! 🐪"    |
+| **PHP**     | ✅ Working | "Hello, World from PHP! 🐘"     |
+| **R**       | ✅ Working | "Hello, World from R! 📊"       |
+| **Rust**    | ✅ Working | "Hello, World from Rust! 🦀"    |
+| **Swift**   | ✅ Working | "Hello, World from Swift! 🦉"   |
+| **Zig**     | ✅ Working | "Hello, World from Zig! ⚡"     |
+
+## ❌ Known Issues (19)
+
+### Missing Build Functions (4)
+
+These languages are missing required build function implementations:
+
+| Language    | Issue                  | Error                              |
+| ----------- | ---------------------- | ---------------------------------- |
+| **Clojure** | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
+| **Lisp**    | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
+| **Ruby**    | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
+| **Tcl**     | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
+
+### Linux-Only Languages (3)
+
+These languages are only available on Linux platforms:
+
+| Language        | Issue      | Error                           |
+| --------------- | ---------- | ------------------------------- |
+| **Julia**       | Linux-only | `attribute 'julia' missing`     |
+| **Objective-C** | Linux-only | `attribute 'objc' missing`      |
+| **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
+
+### Build Configuration Issues (12)
+
+These languages have build or runtime configuration problems:
+
+| Language       | Issue                  | Error                                                           |
+| -------------- | ---------------------- | --------------------------------------------------------------- |
+| **Ada**        | Missing name attribute | `attribute 'name' missing`                                      |
+| **C#**         | Binary format issue    | `Exec format error`                                             |
+| **COBOL**      | Build failure          | gnucobol documentation build failed                             |
+| **Dart**       | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| **Java**       | Compilation issue      | `No executable found`                                           |
+| **JavaScript** | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| **Kotlin**     | REPL deprecated        | `Kotlin REPL is deprecated`                                     |
+| **Lua**        | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| **Nim**        | Cache directory issue  | `cannot create directory: /homeless-shelter/.cache/nim`         |
+| **Python**     | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| **Scala**      | Missing dependencies   | `which: command not found` / `jar: command not found`           |
+| **TypeScript** | Missing Node.js        | `node: command not found`                                       |
+
+## Testing Information
+
+**Results Summary:**
+
+- **Total Languages:** 33
+- **Working:** 14 (42%)
+- **Known Issues:** 19 (58%)
+- **Success Rate:** 42%
+
+**Test Environment:**
+
+- Platform: macOS (Darwin)
+- Date: 2025-08-20
+- Flake Version: ad43672a5bcf13334675245f2143450b207f1454
+- Method: Systematic testing using `nix run` with 5-minute timeouts
+- Result: All tests completed within timeout period
+
+## Complete Language List
 
 ### Systems Programming
 
@@ -148,15 +228,17 @@ When considering new languages, prioritize based on:
 4. **Community Interest**: Popular or historically significant languages
 5. **Maintenance**: Stable toolchain with active development
 
-### Current Status
-
-- **Total Supported**: 33 languages
-- **All Languages**: Use unified build system with `nix build`/`nix run`
-- **All Languages**: Have consistent `just` command interface
-- **All Languages**: Include working hello world examples
-- **All Languages**: Use 6-8 line ultra-minimal solution flakes
-
 ## Contributing
+
+### Fixing Failing Languages
+
+To fix failing languages:
+
+1. **Missing Build Functions:** Implement the missing build functions in `lib/build-functions.nix`
+2. **Linux-Only Languages:** These are platform-specific and expected to fail on macOS
+3. **Build Issues:** Check language-specific configuration in `languages/[language].nix`
+
+### Adding New Languages
 
 When adding support for new languages:
 
@@ -165,3 +247,12 @@ When adding support for new languages:
 3. Test on both macOS and Linux if possible
 4. Update this documentation with the new language
 5. Add appropriate emoji for the language's development shell
+
+### Current Architecture Status
+
+- **Total Supported**: 33 languages
+- **All Languages**: Use unified build system with `nix build`/`nix run`
+- **All Languages**: Have consistent `just` command interface
+- **All Languages**: Include working hello world examples
+- **All Languages**: Use 6-8 line ultra-minimal solution flakes
+- **Working Languages**: 14 (42%) fully functional for AOC challenges
