@@ -101,10 +101,6 @@
             inherit pkgs;
             base = baseLib;
           };
-          objc = import ./languages/objc.nix {
-            inherit pkgs;
-            base = baseLib;
-          };
           cobol = import ./languages/cobol.nix {
             inherit pkgs;
             base = baseLib;
@@ -160,6 +156,10 @@
         }
         // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
           julia = import ./languages/julia.nix {
+            inherit pkgs;
+            base = baseLib;
+          };
+          objc = import ./languages/objc.nix {
             inherit pkgs;
             base = baseLib;
           };
