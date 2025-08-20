@@ -10,7 +10,7 @@
       ...
     }@args:
     pkgs.writeShellApplication {
-      inherit pname;
+      name = pname;
       runtimeInputs = [ interpreter ];
       text = ''
         srcfile=$(find ${src} -maxdepth 1 ${
@@ -40,7 +40,7 @@
       ...
     }@args:
     pkgs.writeShellApplication {
-      inherit pname;
+      name = pname;
       runtimeInputs = [ interpreter ];
       text = ''
         srcfile=$(find ${src} -maxdepth 1 ${
