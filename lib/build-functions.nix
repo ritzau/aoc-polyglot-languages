@@ -244,17 +244,11 @@
         cp -r ${src}/* "$tmpdir/"
         cd "$tmpdir"
 
-        # Find Scala library path
-        SCALA_LIB=$(find ${pkgs.scala} -name "scala-library*.jar" | head -1)
-
         # Compile all Scala files
         scalac ./*.scala
 
-        # Create JAR with Scala runtime included
-        jar cfe ${pname}.jar ${mainClass} ./*.class
-
-        # Run with Scala library in classpath
-        exec java -cp "$SCALA_LIB:${pname}.jar" ${mainClass} "$@"
+        # Run the compiled classes directly with scala command
+        exec scala ${mainClass} "$@"
       '';
     };
 }
