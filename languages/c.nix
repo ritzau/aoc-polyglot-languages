@@ -1,7 +1,4 @@
 { pkgs, base }:
-let
-  justfile = base.mkJustfile "c";
-in
 {
   devShell = base.mkLanguageShell {
     name = "C";
@@ -14,12 +11,6 @@ in
       pkg-config
       clang-tools
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied C-specific justfile"
-      fi
-    '';
   };
 
   mkStandardOutputs =
