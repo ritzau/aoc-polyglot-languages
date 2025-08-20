@@ -169,8 +169,20 @@
 
       in
       {
-        # Expose each language as separate dev shell outputs
-        devShells = builtins.mapAttrs (_: lang: lang.devShell) languages;
+        # Universal development shell with all tools
+        devShells = {
+          default = base.mkLanguageShell {
+            name = "AOC Polyglot";
+            emoji = "🎄";
+            languageTools = [ ]; # No language-specific tools in universal shell
+            extraShellHook = ''
+              echo "Available languages: c, cpp, python, rust, go, haskell, javascript, etc."
+              echo "Navigate to solution directories to get language-specific environments"
+              echo "Run 'nix develop .#<language>' to enter specific language shells"
+            '';
+          };
+        }
+        // builtins.mapAttrs (_: lang: lang.devShell) languages;
 
         # Expose solution builders for each language
         lib = builtins.mapAttrs (_: lang: {

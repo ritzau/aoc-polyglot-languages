@@ -2,36 +2,42 @@
 let
   # Universal tools available in all language environments
   universalTools = with pkgs; [
-    # Build and task management
+    # Core development tools
+    git
+    direnv
+    nix-direnv
     just
+    delta
+    bottom
+    ripgrep
 
-    # System information and monitoring
+    # Text editors and utilities
+    vim
+    curl
+    wget
+    jq
+
+    # Benchmarking and profiling
+    hyperfine
+    time
+
+    # Code formatting and linting
+    pre-commit
+    clang-tools # includes clang-format
+    nixfmt-rfc-style
+    nodePackages.prettier
+
+    # Additional useful tools
     fastfetch
     htop
-    bottom # Alternative to htop
-
-    # File operations and search
-    ripgrep # rg - fast text search
     fd # Fast find replacement
     tree # Directory tree viewer
     bat # Better cat with syntax highlighting
-
-    # Text processing and data manipulation
-    jq # JSON processor
     yq # YAML processor
-
-    # Version control and network tools
-    git
-    curl
-    wget
 
     # File compression and archiving
     unzip
     gzip
-
-    # Development utilities
-    delta # Better git diff
-    hyperfine # Benchmarking tool
   ];
 in
 {
@@ -60,8 +66,9 @@ in
         echo "Use 'just --list' to see available commands"
         echo ""
         echo "Universal tools available:"
-        echo "  rg, fd, tree, bat, jq, yq, git, curl, wget"
-        echo "  fastfetch, htop, bottom, delta, hyperfine"
+        echo "  git, just, rg, fd, tree, bat, jq, yq, curl, wget"
+        echo "  hyperfine, delta, bottom, htop, pre-commit"
+        echo "  vim, clang-format, nixfmt, prettier"
         ${extraShellHook}
       '';
     };
