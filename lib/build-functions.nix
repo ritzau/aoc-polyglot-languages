@@ -32,6 +32,7 @@
       fileExtensions,
       interpreterName,
       interpreterArgs ? [ ],
+      runtimeInputs ? [ ],
     }:
     {
       pkgs,
@@ -41,7 +42,7 @@
     }@args:
     pkgs.writeShellApplication {
       name = pname;
-      runtimeInputs = [ interpreter ];
+      runtimeInputs = [ interpreter ] ++ runtimeInputs;
       text = ''
         srcfile=$(find ${src} -maxdepth 1 ${
           builtins.concatStringsSep " -o " (map (ext: "-name \"*.${ext}\"") fileExtensions)
