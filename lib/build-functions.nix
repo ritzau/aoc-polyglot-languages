@@ -25,6 +25,36 @@
       '';
     };
 
+  # For script languages with custom interpreter names
+  scriptRunner =
+    {
+      interpreter,
+      fileExtensions,
+      interpreterName,
+      interpreterArgs ? [ ],
+    }:
+    {
+      pkgs,
+      src ? ./.,
+      pname,
+      ...
+    }@args:
+    pkgs.writeShellApplication {
+      inherit pname;
+      runtimeInputs = [ interpreter ];
+      text = ''
+        srcfile=$(find ${src} -maxdepth 1 ${
+          builtins.concatStringsSep " -o " (map (ext: "-name \"*.${ext}\"") fileExtensions)
+        } | head -1)
+        if [ -n "$srcfile" ]; then
+          exec ${interpreterName} ${builtins.concatStringsSep " " interpreterArgs} "$srcfile" "$@"
+        else
+          echo "No source files found in ${src}"
+          exit 1
+        fi
+      '';
+    };
+
   # For simple compilers (C, C++, Fortran, etc.)
   simpleCompiler =
     {
