@@ -33,7 +33,7 @@ let
         interpreter = pkgs.ruby;
         fileExtensions = [ "rb" ];
         interpreterName = "ruby";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

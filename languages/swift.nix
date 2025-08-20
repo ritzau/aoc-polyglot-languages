@@ -33,7 +33,7 @@ let
         compiler = pkgs.swift;
         fileExtensions = [ "swift" ];
         compileCmd = "swiftc *.swift -o hello-swift";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

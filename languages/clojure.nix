@@ -35,7 +35,7 @@ let
         fileExtensions = [ "clj" ];
         interpreterName = "clojure";
         runtimeInputs = [ pkgs.openjdk ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

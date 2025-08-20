@@ -32,7 +32,7 @@ let
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.dart;
         fileExtensions = [ "dart" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

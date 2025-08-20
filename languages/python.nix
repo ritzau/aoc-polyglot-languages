@@ -43,7 +43,7 @@ let
       package = base.buildFunctions.interpreter {
         interpreter = python;
         fileExtensions = [ "py" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

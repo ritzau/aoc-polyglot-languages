@@ -36,7 +36,7 @@ let
       language = "c";
       package = base.buildFunctions.makeBuild {
         buildInputs = with pkgs; [ gcc ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

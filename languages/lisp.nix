@@ -38,7 +38,7 @@ let
         ];
         interpreterName = "sbcl";
         interpreterArgs = [ "--script" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

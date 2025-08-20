@@ -34,7 +34,7 @@ let
         compiler = pkgs.ocaml;
         fileExtensions = [ "ml" ];
         compileCmd = "ocamlc -o hello-ocaml *.ml";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

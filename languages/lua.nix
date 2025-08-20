@@ -32,7 +32,7 @@ let
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.lua;
         fileExtensions = [ "lua" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

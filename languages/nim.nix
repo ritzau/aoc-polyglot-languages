@@ -33,7 +33,7 @@ let
         compiler = pkgs.nim;
         fileExtensions = [ "nim" ];
         compileCmd = "nim compile --verbosity:0 -o:hello-nim *.nim";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

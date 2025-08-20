@@ -35,7 +35,7 @@ let
         compiler = pkgs.mono;
         fileExtensions = [ "cs" ];
         compileCmd = "mcs -out:hello-csharp.exe *.cs";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

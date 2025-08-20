@@ -34,7 +34,7 @@ let
         fileExtensions = [ "st" ];
         interpreterName = "gst";
         interpreterArgs = [ "-f" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

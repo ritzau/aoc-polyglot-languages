@@ -37,7 +37,7 @@ let
       language = "cpp";
       package = base.buildFunctions.cmakeBuild {
         buildInputs = with pkgs; [ gcc ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

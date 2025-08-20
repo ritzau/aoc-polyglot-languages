@@ -33,7 +33,7 @@ let
         interpreter = pkgs.tcl;
         fileExtensions = [ "tcl" ];
         interpreterName = "tclsh";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

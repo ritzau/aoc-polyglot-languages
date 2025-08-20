@@ -35,7 +35,7 @@ let
         compiler = pkgs.jdk21;
         fileExtensions = [ "java" ];
         compileCmd = "javac *.java && jar cfe hello-java.jar Main *.class";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

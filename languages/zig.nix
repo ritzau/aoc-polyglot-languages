@@ -34,7 +34,7 @@ let
         compiler = pkgs.zig;
         fileExtensions = [ "zig" ];
         compileCmd = "export HOME=$TMPDIR ZIG_LOCAL_CACHE_DIR=$TMPDIR/zig-cache ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache && mkdir -p $TMPDIR/zig-cache && zig build-exe *.zig -femit-bin=hello-zig --cache-dir $TMPDIR/zig-cache";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

@@ -33,7 +33,7 @@ let
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.nodejs_20;
         fileExtensions = [ "js" ];
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

@@ -34,7 +34,7 @@ let
         compiler = pkgs.typescript;
         fileExtensions = [ "ts" ];
         compileCmd = "tsc *.ts --outDir dist && node dist/*.js";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {

@@ -40,7 +40,7 @@ let
         compiler = haskellPackages.ghc;
         fileExtensions = [ "hs" ];
         compileCmd = "ghc -o hello-haskell *.hs";
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {
