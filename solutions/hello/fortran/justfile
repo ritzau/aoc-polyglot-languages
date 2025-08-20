@@ -1,7 +1,0 @@
-# Hello World Fortran - Import language commands
-import '../../../languages/fortran/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Fortran ==="
-    @just run

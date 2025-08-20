@@ -1,7 +1,0 @@
-# Hello World Lisp - Import language commands
-import '../../../languages/lisp/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Lisp ==="
-    @just run

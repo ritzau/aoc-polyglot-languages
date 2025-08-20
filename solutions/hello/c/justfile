@@ -1,8 +1,0 @@
-# Hello World C - Import language commands
-import '../../../languages/c/justfile'
-
-# Solution-specific commands can be added here
-# Example: hello command for easy testing
-hello:
-    @echo "=== Hello World C ==="
-    @just run

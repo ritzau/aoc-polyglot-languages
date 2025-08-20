@@ -1,7 +1,0 @@
-# Hello World Ada - Import language commands
-import '../../../languages/ada/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Ada ==="
-    @just run

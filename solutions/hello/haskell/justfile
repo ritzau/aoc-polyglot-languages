@@ -1,7 +1,0 @@
-# Hello World Haskell - Import language commands
-import '../../../languages/haskell/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Haskell ==="
-    @just run

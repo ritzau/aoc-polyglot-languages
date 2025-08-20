@@ -1,7 +1,0 @@
-# Hello World Python - Import language commands
-import '../../../languages/python/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Python ==="
-    @just run

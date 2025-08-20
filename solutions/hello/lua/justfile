@@ -1,7 +1,0 @@
-# Hello World Lua - Import language commands
-import '../../../languages/lua/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Lua ==="
-    @just run

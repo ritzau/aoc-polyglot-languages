@@ -1,7 +1,0 @@
-# Hello World PHP - Import language commands
-import '../../../languages/php/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World PHP ==="
-    @just run

@@ -1,7 +1,0 @@
-# Hello World D - Import language commands
-import '../../../languages/d/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World D ==="
-    @just run

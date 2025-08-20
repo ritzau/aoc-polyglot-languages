@@ -1,7 +1,0 @@
-# Hello World C++ - Import language commands
-import '../../../languages/cpp/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World C++ ==="
-    @just run

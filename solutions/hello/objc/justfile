@@ -1,7 +1,0 @@
-# Hello World Objective-C - Import language commands
-import '../../../languages/objc/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Objective-C ==="
-    @just run

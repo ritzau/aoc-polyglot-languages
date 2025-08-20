@@ -1,7 +1,0 @@
-# Hello World Swift - Import language commands
-import '../../../languages/swift/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Swift ==="
-    @just run

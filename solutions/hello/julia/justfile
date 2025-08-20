@@ -1,7 +1,0 @@
-# Hello World Julia - Import language commands
-import '../../../languages/julia/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Julia ==="
-    @just run

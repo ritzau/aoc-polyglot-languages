@@ -1,7 +1,0 @@
-# Hello World Dart - Import language commands
-import '../../../languages/dart/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Dart ==="
-    @just run

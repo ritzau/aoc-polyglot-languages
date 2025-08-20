@@ -1,7 +1,0 @@
-# Hello World Zig - Import language commands
-import '../../../languages/zig/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Zig ==="
-    @just run

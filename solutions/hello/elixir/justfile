@@ -1,7 +1,0 @@
-# Hello World Elixir - Import language commands
-import '../../../languages/elixir/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World Elixir ==="
-    @just run

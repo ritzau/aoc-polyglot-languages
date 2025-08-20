@@ -1,7 +1,0 @@
-# Hello World TypeScript - Import language commands
-import '../../../languages/typescript/justfile'
-
-# Solution-specific commands
-hello:
-    @echo "=== Hello World TypeScript ==="
-    @just run
