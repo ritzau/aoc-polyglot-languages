@@ -3,7 +3,7 @@
   base,
   justfilePath ? null,
 }:
-{
+let
   devShell = base.mkLanguageShell {
     name = "Go";
     emoji = "🐹";
@@ -17,7 +17,6 @@
       if justfilePath != null then
         ''
           export JUSTFILE_GO="${justfilePath}"
-          # Create a cache directory and symlink to language justfile
           mkdir -p .cache
           if [ ! -L .cache/go.justfile ]; then
             ln -sf "${justfilePath}" .cache/go.justfile
@@ -27,23 +26,29 @@
       else
         "";
   };
+in
+{
+  inherit devShell;
 
   mkStandardOutputs =
     args:
-    base.mkSolution {
-      language = "go";
-      package = base.buildFunctions.buildSystem (
-        buildArgs:
-        pkgs.buildGoModule (
-          {
-            version = "0.1.0";
-            vendorHash = null; # For simple AOC solutions
-          }
-          // buildArgs
-        )
-      ) args;
-    }
-    // {
-      devShells.default = self.devShell;
-    };
+    (
+      base.mkSolution {
+        language = "go";
+        package = base.buildFunctions.buildSystem (
+          buildArgs:
+          pkgs.buildGoModule (
+            {
+              version = "0.1.0";
+              vendorHash = null;
+            }
+            // buildArgs
+          )
+        ) args;
+      }
+      // {
+        # Assign devShell to devShells.default in the produced solution outputs
+        devShells.default = devShell;
+      }
+    );
 }
