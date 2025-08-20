@@ -49,6 +49,7 @@ in
       # List of language-specific packages
       extraInputs ? [ ], # Optional additional packages
       includeUniversalTools ? true, # Whether to include universal tools
+      extraShellHook ? "", # Additional shell hook commands
     }:
     pkgs.mkShell {
       buildInputs =
@@ -61,8 +62,14 @@ in
         echo "Universal tools available:"
         echo "  rg, fd, tree, bat, jq, yq, git, curl, wget"
         echo "  fastfetch, htop, bottom, delta, hyperfine"
+        ${extraShellHook}
       '';
     };
+
+  # Generate a justfile for a language (requires flake root path)
+  mkJustfile =
+    flakeRoot: language:
+    pkgs.writeText "justfile" (builtins.readFile "${flakeRoot}/justfiles/${language}.justfile");
 
   # Create a solution configuration
   mkSolution =
@@ -90,15 +97,14 @@ in
           null;
 
       # Default checks - package builds if provided
-      defaultChecks =
-        (
-          if package != null then
-            {
-              build = package;
-            }
-          else
-            { }
-        );
+      defaultChecks = (
+        if package != null then
+          {
+            build = package;
+          }
+        else
+          { }
+      );
 
     in
     {
