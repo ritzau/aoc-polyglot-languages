@@ -1,78 +1,52 @@
 {
-  description = "Zig environment for AOC solutions";
+  inputs.base.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/base";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    base = {
-      url = "path:/Users/ritzau/src/slask/aoc-nix/languages/base";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-  };
-
-  outputs = { self, nixpkgs, flake-utils, base }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          baseLib = base.lib.${system};
-        in
-        {
-          devShells.default = baseLib.mkLanguageShell {
-            name = "Zig";
-            emoji = "⚡";
-            languageTools = with baseLib.pkgs; [
-              zig
-              zls
-            ];
-          };
-
-          # Export mkSolution for Zig solutions to use
-          lib = {
-            # Wrapper that provides the language name automatically
-            mkSolution = args: baseLib.mkSolution ({
+  outputs =
+    {
+      self,
+      base,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        baseLib = base.lib.${system};
+      in
+      {
+        devShells.default = baseLib.mkLanguageShell {
+          name = "Zig";
+          emoji = "⚡";
+          languageTools = with baseLib.pkgs; [
+            zig
+            zls
+          ];
+        };
+        lib.mkSolution =
+          args:
+          baseLib.mkSolution (
+            {
               language = "zig";
               languageFlake = self;
-            } // args);
-            inherit (baseLib) pkgs;
-          };
-        }) // {
-      # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = { src ? ./., pname ? "hello-zig", ... }@args:
-        flake-utils.lib.eachDefaultSystem (system:
-          let
-            pkgs = self.lib.${system}.pkgs;
-            # Default package that uses zig compiler
-            defaultPackage = pkgs.stdenv.mkDerivation {
-              pname = pname;
-              version = "0.1.0";
-              src = src;
-              nativeBuildInputs = with pkgs; [ zig ];
-              buildPhase = ''
-                # Set up temp directories for zig cache
-                export HOME=$TMPDIR
-                mkdir -p $TMPDIR/zig-cache
-                export ZIG_LOCAL_CACHE_DIR=$TMPDIR/zig-cache
-                export ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache
-                # Find .zig files and compile the first one found
-                zigfile=$(find . -maxdepth 1 -name "*.zig" | head -1)
-                if [ -n "$zigfile" ]; then
-                  zig build-exe "$zigfile" -femit-bin=${pname} --cache-dir $TMPDIR/zig-cache
-                else
-                  echo "No .zig files found"
-                  exit 1
-                fi
-              '';
-              installPhase = ''
-                mkdir -p $out/bin
-                cp ${pname} $out/bin/
-              '';
-            };
-            # Remove src and pname from args to pass to mkSolution
-            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
-          in
-          self.lib.${system}.mkSolution ({
-            package = defaultPackage;
-          } // cleanArgs));
+            }
+            // args
+          );
+      }
+    )
+    // {
+      mkStandardOutputs =
+        args:
+        flake-utils.lib.eachDefaultSystem (
+          system:
+          self.lib.${system}.mkSolution {
+            package = base.lib.${system}.buildFunctions.simpleCompiler {
+              compiler = base.lib.${system}.pkgs.zig;
+              fileExtensions = [ "zig" ];
+              compileCmd = "export HOME=$TMPDIR ZIG_LOCAL_CACHE_DIR=$TMPDIR/zig-cache ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache && mkdir -p $TMPDIR/zig-cache && zig build-exe *.zig -femit-bin=hello-zig --cache-dir $TMPDIR/zig-cache";
+            } ({ pkgs = base.lib.${system}.pkgs; } // args);
+          }
+        );
     };
 }

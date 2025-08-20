@@ -11,36 +11,55 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, base }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          baseLib = base.lib.${system};
-        in
-        {
-          devShells.default = baseLib.mkLanguageShell {
-            name = "D";
-            emoji = "🎯";
-            languageTools = with baseLib.pkgs; [
-              ldc
-              dub
-              gdb
-            ];
-          };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      base,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        baseLib = base.lib.${system};
+      in
+      {
+        devShells.default = baseLib.mkLanguageShell {
+          name = "D";
+          emoji = "🎯";
+          languageTools = with baseLib.pkgs; [
+            ldc
+            dub
+            gdb
+          ];
+        };
 
-          # Export mkSolution for D solutions to use
-          lib = {
-            # Wrapper that provides the language name automatically
-            mkSolution = args: baseLib.mkSolution ({
-              language = "d";
-              languageFlake = self;
-            } // args);
-            inherit (baseLib) pkgs;
-          };
-        }) // {
+        # Export mkSolution for D solutions to use
+        lib = {
+          # Wrapper that provides the language name automatically
+          mkSolution =
+            args:
+            baseLib.mkSolution (
+              {
+                language = "d";
+                languageFlake = self;
+              }
+              // args
+            );
+          inherit (baseLib) pkgs;
+        };
+      }
+    )
+    // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = { src ? ./., pname ? "hello-d", ... }@args:
-        flake-utils.lib.eachDefaultSystem (system:
+      mkStandardOutputs =
+        {
+          src ? ./.,
+          pname ? "hello-d",
+          ...
+        }@args:
+        flake-utils.lib.eachDefaultSystem (
+          system:
           let
             pkgs = self.lib.${system}.pkgs;
             # Default package that uses ldc2
@@ -65,10 +84,17 @@
               '';
             };
             # Remove src and pname from args to pass to mkSolution
-            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+            cleanArgs = builtins.removeAttrs args [
+              "src"
+              "pname"
+            ];
           in
-          self.lib.${system}.mkSolution ({
-            package = defaultPackage;
-          } // cleanArgs));
+          self.lib.${system}.mkSolution (
+            {
+              package = defaultPackage;
+            }
+            // cleanArgs
+          )
+        );
     };
 }

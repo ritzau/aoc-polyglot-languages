@@ -104,7 +104,6 @@ This project uses Nix flakes with direnv for automatic environment switching:
    ```
 
 2. **Copy template files:**
-
    - Use existing solutions as templates
    - Ensure proper flake.nix inheritance
    - Add .envrc file: `echo "use flake" > .envrc`

@@ -11,36 +11,55 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, base }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          baseLib = base.lib.${system};
-        in
-        {
-          devShells.default = baseLib.mkLanguageShell {
-            name = "Elixir";
-            emoji = "💧";
-            languageTools = with baseLib.pkgs; [
-              elixir
-              erlang
-              elixir-ls
-            ];
-          };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      base,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        baseLib = base.lib.${system};
+      in
+      {
+        devShells.default = baseLib.mkLanguageShell {
+          name = "Elixir";
+          emoji = "💧";
+          languageTools = with baseLib.pkgs; [
+            elixir
+            erlang
+            elixir-ls
+          ];
+        };
 
-          # Export mkSolution for Elixir solutions to use
-          lib = {
-            # Wrapper that provides the language name automatically
-            mkSolution = args: baseLib.mkSolution ({
-              language = "elixir";
-              languageFlake = self;
-            } // args);
-            inherit (baseLib) pkgs;
-          };
-        }) // {
+        # Export mkSolution for Elixir solutions to use
+        lib = {
+          # Wrapper that provides the language name automatically
+          mkSolution =
+            args:
+            baseLib.mkSolution (
+              {
+                language = "elixir";
+                languageFlake = self;
+              }
+              // args
+            );
+          inherit (baseLib) pkgs;
+        };
+      }
+    )
+    // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = { src ? ./., pname ? "hello-elixir", ... }@args:
-        flake-utils.lib.eachDefaultSystem (system:
+      mkStandardOutputs =
+        {
+          src ? ./.,
+          pname ? "hello-elixir",
+          ...
+        }@args:
+        flake-utils.lib.eachDefaultSystem (
+          system:
           let
             pkgs = self.lib.${system}.pkgs;
             # Default package that uses elixir interpreter
@@ -71,10 +90,17 @@
               '';
             };
             # Remove src and pname from args to pass to mkSolution
-            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+            cleanArgs = builtins.removeAttrs args [
+              "src"
+              "pname"
+            ];
           in
-          self.lib.${system}.mkSolution ({
-            package = defaultPackage;
-          } // cleanArgs));
+          self.lib.${system}.mkSolution (
+            {
+              package = defaultPackage;
+            }
+            // cleanArgs
+          )
+        );
     };
 }

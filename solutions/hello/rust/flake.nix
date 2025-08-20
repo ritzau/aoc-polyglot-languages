@@ -5,7 +5,8 @@
     rust-lang.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/rust";
   };
 
-  outputs = { self, rust-lang }:
+  outputs =
+    { self, rust-lang }:
     rust-lang.mkStandardOutputs {
       src = ./.;
       pname = "hello-rust";

@@ -3,7 +3,8 @@
   inputs = {
     lisp-lang.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/lisp";
   };
-  outputs = { self, lisp-lang }:
+  outputs =
+    { self, lisp-lang }:
     lisp-lang.mkStandardOutputs {
       src = ./.;
       pname = "hello-lisp";

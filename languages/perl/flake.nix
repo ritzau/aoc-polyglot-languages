@@ -11,34 +11,53 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, base }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          baseLib = base.lib.${system};
-        in
-        {
-          devShells.default = baseLib.mkLanguageShell {
-            name = "Perl";
-            emoji = "🐪";
-            languageTools = with baseLib.pkgs; [
-              perl
-            ];
-          };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      base,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        baseLib = base.lib.${system};
+      in
+      {
+        devShells.default = baseLib.mkLanguageShell {
+          name = "Perl";
+          emoji = "🐪";
+          languageTools = with baseLib.pkgs; [
+            perl
+          ];
+        };
 
-          # Export mkSolution for Perl solutions to use
-          lib = {
-            # Wrapper that provides the language name automatically
-            mkSolution = args: baseLib.mkSolution ({
-              language = "perl";
-              languageFlake = self;
-            } // args);
-            inherit (baseLib) pkgs;
-          };
-        }) // {
+        # Export mkSolution for Perl solutions to use
+        lib = {
+          # Wrapper that provides the language name automatically
+          mkSolution =
+            args:
+            baseLib.mkSolution (
+              {
+                language = "perl";
+                languageFlake = self;
+              }
+              // args
+            );
+          inherit (baseLib) pkgs;
+        };
+      }
+    )
+    // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = { src ? ./., pname ? "hello-perl", ... }@args:
-        flake-utils.lib.eachDefaultSystem (system:
+      mkStandardOutputs =
+        {
+          src ? ./.,
+          pname ? "hello-perl",
+          ...
+        }@args:
+        flake-utils.lib.eachDefaultSystem (
+          system:
           let
             pkgs = self.lib.${system}.pkgs;
             # Default package that creates a wrapper script for Perl
@@ -57,10 +76,17 @@
               '';
             };
             # Remove src and pname from args to pass to mkSolution
-            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+            cleanArgs = builtins.removeAttrs args [
+              "src"
+              "pname"
+            ];
           in
-          self.lib.${system}.mkSolution ({
-            package = defaultPackage;
-          } // cleanArgs));
+          self.lib.${system}.mkSolution (
+            {
+              package = defaultPackage;
+            }
+            // cleanArgs
+          )
+        );
     };
 }

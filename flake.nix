@@ -6,8 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -33,7 +39,7 @@
             # Code formatting and linting
             pre-commit
             clang-tools # includes clang-format
-            nixpkgs-fmt
+            nixfmt-rfc-style
             nodePackages.prettier
 
             # Build all script (compiled languages only)
@@ -65,5 +71,6 @@
         # Note: To build all solutions, run individual builds
         # nix build ./solutions/2024/day01/rust
         # Or create a script to build all
-      });
+      }
+    );
 }

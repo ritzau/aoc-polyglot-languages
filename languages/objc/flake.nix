@@ -11,36 +11,55 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, base }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          baseLib = base.lib.${system};
-        in
-        {
-          devShells.default = baseLib.mkLanguageShell {
-            name = "Objective-C";
-            emoji = "🍎";
-            languageTools = with baseLib.pkgs; [
-              clang
-              gnustep-base
-              gnustep-make
-            ];
-          };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      base,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        baseLib = base.lib.${system};
+      in
+      {
+        devShells.default = baseLib.mkLanguageShell {
+          name = "Objective-C";
+          emoji = "🍎";
+          languageTools = with baseLib.pkgs; [
+            clang
+            gnustep-base
+            gnustep-make
+          ];
+        };
 
-          # Export mkSolution for Objective-C solutions to use
-          lib = {
-            # Wrapper that provides the language name automatically
-            mkSolution = args: baseLib.mkSolution ({
-              language = "objc";
-              languageFlake = self;
-            } // args);
-            inherit (baseLib) pkgs;
-          };
-        }) // {
+        # Export mkSolution for Objective-C solutions to use
+        lib = {
+          # Wrapper that provides the language name automatically
+          mkSolution =
+            args:
+            baseLib.mkSolution (
+              {
+                language = "objc";
+                languageFlake = self;
+              }
+              // args
+            );
+          inherit (baseLib) pkgs;
+        };
+      }
+    )
+    // {
       # Complete solution outputs - eliminates all boilerplate
-      mkStandardOutputs = { src ? ./., pname ? "hello-objc", ... }@args:
-        flake-utils.lib.eachDefaultSystem (system:
+      mkStandardOutputs =
+        {
+          src ? ./.,
+          pname ? "hello-objc",
+          ...
+        }@args:
+        flake-utils.lib.eachDefaultSystem (
+          system:
           let
             pkgs = self.lib.${system}.pkgs;
             # Default package that creates a wrapper script for Objective-C
@@ -48,7 +67,11 @@
               pname = pname;
               version = "0.1.0";
               src = src;
-              nativeBuildInputs = [ pkgs.clang pkgs.gnustep-base pkgs.gnustep-make ];
+              nativeBuildInputs = [
+                pkgs.clang
+                pkgs.gnustep-base
+                pkgs.gnustep-make
+              ];
               buildPhase = ''
                 # Find the objective-c file in the source directory
                 objcfile=$(find . -maxdepth 1 -name "*.m" | head -1)
@@ -65,10 +88,17 @@
               '';
             };
             # Remove src and pname from args to pass to mkSolution
-            cleanArgs = builtins.removeAttrs args [ "src" "pname" ];
+            cleanArgs = builtins.removeAttrs args [
+              "src"
+              "pname"
+            ];
           in
-          self.lib.${system}.mkSolution ({
-            package = defaultPackage;
-          } // cleanArgs));
+          self.lib.${system}.mkSolution (
+            {
+              package = defaultPackage;
+            }
+            // cleanArgs
+          )
+        );
     };
 }

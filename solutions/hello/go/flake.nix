@@ -5,7 +5,8 @@
     go-lang.url = "path:/Users/ritzau/src/slask/aoc-nix/languages/go";
   };
 
-  outputs = { self, go-lang }:
+  outputs =
+    { self, go-lang }:
     go-lang.mkStandardOutputs {
       src = ./.;
       pname = "hello-go";
