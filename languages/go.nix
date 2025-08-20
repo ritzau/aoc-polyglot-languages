@@ -4,8 +4,6 @@
   justfilePath ? null,
 }:
 {
-  inherit devShell;
-
   mkStandardOutputs =
     args:
     (
