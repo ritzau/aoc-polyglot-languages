@@ -1,7 +1,8 @@
-{ pkgs, base }:
-let
-  justfile = base.mkJustfile "cobol";
-in
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "COBOL";
@@ -9,12 +10,19 @@ in
     languageTools = with pkgs; [
       gnucobol
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied COBOL-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_COBOL="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/cobol.justfile ]; then
+            ln -sf "${justfilePath}" .cache/cobol.justfile
+            echo "📋 Linked .cache/cobol.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

@@ -1,7 +1,8 @@
-{ pkgs, base }:
-let
-  justfile = base.mkJustfile "dart";
-in
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "Dart";
@@ -9,12 +10,19 @@ in
     languageTools = with pkgs; [
       dart
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied Dart-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_DART="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/dart.justfile ]; then
+            ln -sf "${justfilePath}" .cache/dart.justfile
+            echo "📋 Linked .cache/dart.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

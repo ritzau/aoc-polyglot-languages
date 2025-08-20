@@ -1,7 +1,8 @@
-{ pkgs, base }:
-let
-  justfile = base.mkJustfile "javascript";
-in
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "JavaScript";
@@ -10,12 +11,19 @@ in
       nodejs_20
       npm-check-updates
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied JavaScript-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_JAVASCRIPT="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/javascript.justfile ]; then
+            ln -sf "${justfilePath}" .cache/javascript.justfile
+            echo "📋 Linked .cache/javascript.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

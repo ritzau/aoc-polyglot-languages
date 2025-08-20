@@ -1,7 +1,8 @@
-{ pkgs, base }:
-let
-  justfile = base.mkJustfile "rust";
-in
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "Rust";
@@ -13,12 +14,19 @@ in
       rustfmt
       cargo-watch
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied Rust-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_RUST="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/rust.justfile ]; then
+            ln -sf "${justfilePath}" .cache/rust.justfile
+            echo "📋 Linked .cache/rust.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

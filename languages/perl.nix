@@ -1,7 +1,8 @@
-{ pkgs, base }:
-let
-  justfile = base.mkJustfile "perl";
-in
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "Perl";
@@ -9,12 +10,19 @@ in
     languageTools = with pkgs; [
       perl
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied Perl-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_PERL="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/perl.justfile ]; then
+            ln -sf "${justfilePath}" .cache/perl.justfile
+            echo "📋 Linked .cache/perl.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

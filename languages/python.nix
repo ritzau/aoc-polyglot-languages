@@ -1,7 +1,10 @@
-{ pkgs, base }:
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 let
   python = pkgs.python311;
-  justfile = base.mkJustfile "python";
 in
 {
   devShell = base.mkLanguageShell {
@@ -19,12 +22,19 @@ in
       networkx
       sympy
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied Python-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_PYTHON="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/python.justfile ]; then
+            ln -sf "${justfilePath}" .cache/python.justfile
+            echo "📋 Linked .cache/python.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

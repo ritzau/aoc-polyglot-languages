@@ -1,7 +1,10 @@
-{ pkgs, base }:
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 let
   haskellPackages = pkgs.haskellPackages;
-  justfile = base.mkJustfile "haskell";
 in
 {
   devShell = base.mkLanguageShell {
@@ -15,12 +18,19 @@ in
       hlint
       ormolu
     ];
-    extraShellHook = ''
-      if [ ! -f justfile ]; then
-        cp ${justfile} justfile
-        echo "📋 Copied Haskell-specific justfile"
-      fi
-    '';
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_HASKELL="${justfilePath}"
+          # Create a cache directory and symlink to language justfile
+          mkdir -p .cache
+          if [ ! -L .cache/haskell.justfile ]; then
+            ln -sf "${justfilePath}" .cache/haskell.justfile
+            echo "📋 Linked .cache/haskell.justfile to language definition"
+          fi
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =

@@ -37,118 +37,147 @@
           cpp = import ./languages/cpp.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/cpp.justfile;
           };
           python = import ./languages/python.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/python.justfile;
           };
           rust = import ./languages/rust.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/rust.justfile;
           };
           go = import ./languages/go.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/go.justfile;
           };
           haskell = import ./languages/haskell.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/haskell.justfile;
           };
           javascript = import ./languages/javascript.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/javascript.justfile;
           };
           typescript = import ./languages/typescript.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/typescript.justfile;
           };
           java = import ./languages/java.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/java.justfile;
           };
           kotlin = import ./languages/kotlin.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/kotlin.justfile;
           };
           d = import ./languages/d.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/d.justfile;
           };
           swift = import ./languages/swift.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/swift.justfile;
           };
           zig = import ./languages/zig.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/zig.justfile;
           };
           nim = import ./languages/nim.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/nim.justfile;
           };
           scala = import ./languages/scala.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/scala.justfile;
           };
           elixir = import ./languages/elixir.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/elixir.justfile;
           };
           dart = import ./languages/dart.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/dart.justfile;
           };
           csharp = import ./languages/csharp.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/csharp.justfile;
           };
           cobol = import ./languages/cobol.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/cobol.justfile;
           };
           r = import ./languages/r.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/r.justfile;
           };
           php = import ./languages/php.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/php.justfile;
           };
           lua = import ./languages/lua.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/lua.justfile;
           };
           perl = import ./languages/perl.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/perl.justfile;
           };
           ruby = import ./languages/ruby.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/ruby.justfile;
           };
           ocaml = import ./languages/ocaml.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/ocaml.justfile;
           };
           clojure = import ./languages/clojure.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/clojure.justfile;
           };
           lisp = import ./languages/lisp.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/lisp.justfile;
           };
           fortran = import ./languages/fortran.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/fortran.justfile;
           };
           ada = import ./languages/ada.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/ada.justfile;
           };
           tcl = import ./languages/tcl.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/tcl.justfile;
           };
         }
         // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
@@ -156,14 +185,17 @@
           julia = import ./languages/julia.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/julia.justfile;
           };
           objc = import ./languages/objc.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/objc.justfile;
           };
           smalltalk = import ./languages/smalltalk.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/smalltalk.justfile;
           };
         };
 
