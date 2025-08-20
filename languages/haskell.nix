@@ -31,6 +31,6 @@ in
         compiler = haskellPackages.ghc;
         fileExtensions = [ "hs" ];
         compileCmd = "ghc -o hello-haskell *.hs";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

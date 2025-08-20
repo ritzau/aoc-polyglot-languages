@@ -26,6 +26,6 @@ in
         fileExtensions = [ "st" ];
         interpreterName = "gst";
         interpreterArgs = [ "-f" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

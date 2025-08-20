@@ -27,6 +27,6 @@ in
         compiler = pkgs.kotlin;
         fileExtensions = [ "kt" ];
         compileCmd = "kotlinc *.kt -include-runtime -d hello-kotlin.jar";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

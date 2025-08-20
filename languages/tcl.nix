@@ -25,6 +25,6 @@ in
         interpreter = pkgs.tcl;
         fileExtensions = [ "tcl" ];
         interpreterName = "tclsh";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

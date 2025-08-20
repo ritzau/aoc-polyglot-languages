@@ -26,6 +26,6 @@ in
         compiler = pkgs.typescript;
         fileExtensions = [ "ts" ];
         compileCmd = "tsc *.ts --outDir dist && node dist/*.js";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

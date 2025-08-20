@@ -45,6 +45,6 @@ in
             cp ${buildArgs.pname or "hello-d"} $out/bin/
           '';
         }
-      ) ({ inherit pkgs; } // args);
+      ) args;
     };
 }

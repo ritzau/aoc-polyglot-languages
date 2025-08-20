@@ -25,6 +25,6 @@ in
         compiler = pkgs.swift;
         fileExtensions = [ "swift" ];
         compileCmd = "swiftc *.swift -o hello-swift";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

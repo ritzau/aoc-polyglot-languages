@@ -24,6 +24,6 @@ in
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.dart;
         fileExtensions = [ "dart" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

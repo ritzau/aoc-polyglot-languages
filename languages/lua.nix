@@ -24,6 +24,6 @@ in
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.lua;
         fileExtensions = [ "lua" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

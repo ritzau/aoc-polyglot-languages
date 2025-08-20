@@ -26,6 +26,6 @@ in
         compiler = pkgs.ocaml;
         fileExtensions = [ "ml" ];
         compileCmd = "ocamlc -o hello-ocaml *.ml";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

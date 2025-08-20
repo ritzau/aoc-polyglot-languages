@@ -27,6 +27,6 @@ in
         compiler = pkgs.scala;
         fileExtensions = [ "scala" ];
         compileCmd = "scalac *.scala && jar cfe hello-scala.jar Main *.class";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

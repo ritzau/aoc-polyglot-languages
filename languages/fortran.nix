@@ -29,6 +29,6 @@ in
           "f"
         ];
         compileCmd = "gfortran *.f90 -o hello-fortran || gfortran *.f95 -o hello-fortran || gfortran *.f -o hello-fortran";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

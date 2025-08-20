@@ -27,6 +27,6 @@ in
         compiler = pkgs.mono;
         fileExtensions = [ "cs" ];
         compileCmd = "mcs -out:hello-csharp.exe *.cs";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

@@ -34,6 +34,6 @@ in
       package = base.buildFunctions.interpreter {
         interpreter = python;
         fileExtensions = [ "py" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

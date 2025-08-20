@@ -27,6 +27,6 @@ in
         fileExtensions = [ "clj" ];
         interpreterName = "clojure";
         runtimeInputs = [ pkgs.openjdk ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

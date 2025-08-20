@@ -36,6 +36,6 @@
       language = "c";
       package = base.buildFunctions.makeBuild {
         buildInputs = with pkgs; [ gcc ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

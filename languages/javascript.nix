@@ -25,6 +25,6 @@ in
       package = base.buildFunctions.interpreter {
         interpreter = pkgs.nodejs_20;
         fileExtensions = [ "js" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

@@ -25,6 +25,6 @@ in
         interpreter = pkgs.ruby;
         fileExtensions = [ "rb" ];
         interpreterName = "ruby";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

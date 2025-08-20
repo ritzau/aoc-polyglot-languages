@@ -25,6 +25,6 @@ in
         compiler = pkgs.nim;
         fileExtensions = [ "nim" ];
         compileCmd = "nim compile --verbosity:0 -o:hello-nim *.nim";
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

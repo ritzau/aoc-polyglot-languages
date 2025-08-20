@@ -33,6 +33,6 @@ in
           }
           // buildArgs
         )
-      ) ({ inherit pkgs; } // args);
+      ) args;
     };
 }

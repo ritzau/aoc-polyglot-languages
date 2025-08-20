@@ -30,6 +30,6 @@ in
         ];
         interpreterName = "sbcl";
         interpreterArgs = [ "--script" ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }

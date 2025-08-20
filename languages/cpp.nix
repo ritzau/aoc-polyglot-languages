@@ -29,6 +29,6 @@ in
       language = "cpp";
       package = base.buildFunctions.cmakeBuild {
         buildInputs = with pkgs; [ gcc ];
-      } ({ inherit pkgs; } // args);
+      } args;
     };
 }
