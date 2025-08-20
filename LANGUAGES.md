@@ -2,7 +2,7 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (14)
+## ✅ Working Languages (18)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
@@ -10,31 +10,24 @@ These languages are fully functional and ready for Advent of Code challenges:
 | ----------- | ---------- | ------------------------------- |
 | **C**       | ✅ Working | "Hello, World from C! 🔧"       |
 | **C++**     | ✅ Working | "Hello, World from C++! ⚡"     |
+| **Clojure** | ✅ Working | "Hello, World from Clojure! 🔁" |
 | **D**       | ✅ Working | "Hello, World from D! 🎯"       |
 | **Elixir**  | ✅ Working | "Hello, World from Elixir! 💧"  |
 | **Fortran** | ✅ Working | "Hello, World from Fortran! 🏗️" |
 | **Go**      | ✅ Working | "Hello, World from Go! 🐹"      |
 | **Haskell** | ✅ Working | "Hello, World from Haskell! λ"  |
+| **Lisp**    | ✅ Working | "Hello, World from Lisp! 🔥"    |
 | **OCaml**   | ✅ Working | "Hello, World from OCaml! 🐫"   |
 | **Perl**    | ✅ Working | "Hello, World from Perl! 🐪"    |
 | **PHP**     | ✅ Working | "Hello, World from PHP! 🐘"     |
 | **R**       | ✅ Working | "Hello, World from R! 📊"       |
+| **Ruby**    | ✅ Working | "Hello, World from Ruby! 💎"    |
 | **Rust**    | ✅ Working | "Hello, World from Rust! 🦀"    |
 | **Swift**   | ✅ Working | "Hello, World from Swift! 🦉"   |
+| **Tcl**     | ✅ Working | "Hello, World from Tcl! 🪶"     |
 | **Zig**     | ✅ Working | "Hello, World from Zig! ⚡"     |
 
-## ❌ Known Issues (19)
-
-### Missing Build Functions (4)
-
-These languages are missing required build function implementations:
-
-| Language    | Issue                  | Error                              |
-| ----------- | ---------------------- | ---------------------------------- |
-| **Clojure** | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
-| **Lisp**    | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
-| **Ruby**    | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
-| **Tcl**     | Missing `scriptRunner` | `attribute 'scriptRunner' missing` |
+## ❌ Known Issues (15)
 
 ### Linux-Only Languages (3)
 
@@ -70,9 +63,9 @@ These languages have build or runtime configuration problems:
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 14 (42%)
-- **Known Issues:** 19 (58%)
-- **Success Rate:** 42%
+- **Working:** 18 (55%)
+- **Known Issues:** 15 (45%)
+- **Success Rate:** 55%
 
 **Test Environment:**
 
