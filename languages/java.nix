@@ -31,10 +31,8 @@ let
     args:
     base.mkSolution {
       language = "java";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.jdk21;
-        fileExtensions = [ "java" ];
-        compileCmd = "javac *.java && jar cfe hello-java.jar Main *.class";
+      package = base.buildFunctions.javaBuild {
+        mainClass = "Hello";
       } (args // { pkgs = pkgs; });
     };
 in

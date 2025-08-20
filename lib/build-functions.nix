@@ -159,4 +159,33 @@
         find build -name "${pname}" -executable -type f -exec cp {} $out/bin/ \;
       '';
     };
+
+  # For Java compilation and JAR creation
+  javaBuild =
+    {
+      mainClass,
+    }:
+    {
+      pkgs,
+      src ? ./.,
+      pname,
+      ...
+    }@args:
+    pkgs.writeShellApplication {
+      name = pname;
+      runtimeInputs = [ pkgs.jdk21 ];
+      text = ''
+        # Create temporary directory for compilation
+        tmpdir=$(mktemp -d)
+        cp -r ${src}/* "$tmpdir/"
+        cd "$tmpdir"
+
+        # Compile all Java files
+        javac *.java
+
+        # Create and run JAR
+        jar cfe ${pname}.jar ${mainClass} *.class
+        exec java -jar ${pname}.jar "$@"
+      '';
+    };
 }
