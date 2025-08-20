@@ -32,6 +32,7 @@
           c = import ./languages/c.nix {
             inherit pkgs;
             base = baseLib;
+            justfilePath = ./justfiles/c.justfile;
           };
           cpp = import ./languages/cpp.nix {
             inherit pkgs;
@@ -175,6 +176,46 @@
         lib = builtins.mapAttrs (_: lang: {
           mkStandardOutputs = lang.mkStandardOutputs;
         }) languages;
+
+        # Expose justfiles for each language
+        justfiles = {
+          c = ./justfiles/c.justfile;
+          cpp = ./justfiles/cpp.justfile;
+          python = ./justfiles/python.justfile;
+          rust = ./justfiles/rust.justfile;
+          go = ./justfiles/go.justfile;
+          haskell = ./justfiles/haskell.justfile;
+          javascript = ./justfiles/javascript.justfile;
+          typescript = ./justfiles/typescript.justfile;
+          java = ./justfiles/java.justfile;
+          kotlin = ./justfiles/kotlin.justfile;
+          d = ./justfiles/d.justfile;
+          swift = ./justfiles/swift.justfile;
+          zig = ./justfiles/zig.justfile;
+          nim = ./justfiles/nim.justfile;
+          scala = ./justfiles/scala.justfile;
+          elixir = ./justfiles/elixir.justfile;
+          dart = ./justfiles/dart.justfile;
+          csharp = ./justfiles/csharp.justfile;
+          cobol = ./justfiles/cobol.justfile;
+          r = ./justfiles/r.justfile;
+          php = ./justfiles/php.justfile;
+          lua = ./justfiles/lua.justfile;
+          perl = ./justfiles/perl.justfile;
+          ruby = ./justfiles/ruby.justfile;
+          ocaml = ./justfiles/ocaml.justfile;
+          clojure = ./justfiles/clojure.justfile;
+          lisp = ./justfiles/lisp.justfile;
+          fortran = ./justfiles/fortran.justfile;
+          ada = ./justfiles/ada.justfile;
+          tcl = ./justfiles/tcl.justfile;
+        }
+        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
+          # Linux-only language justfiles
+          julia = ./justfiles/julia.justfile;
+          objc = ./justfiles/objc.justfile;
+          smalltalk = ./justfiles/smalltalk.justfile;
+        };
 
         # Also expose the base functionality for custom use
         baseLib = baseLib;

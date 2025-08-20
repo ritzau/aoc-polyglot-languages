@@ -1,4 +1,8 @@
-{ pkgs, base }:
+{
+  pkgs,
+  base,
+  justfilePath ? null,
+}:
 {
   devShell = base.mkLanguageShell {
     name = "C";
@@ -11,6 +15,13 @@
       pkg-config
       clang-tools
     ];
+    extraShellHook =
+      if justfilePath != null then
+        ''
+          export JUSTFILE_C="${justfilePath}"
+        ''
+      else
+        "";
   };
 
   mkStandardOutputs =
