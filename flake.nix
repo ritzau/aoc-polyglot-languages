@@ -266,5 +266,122 @@
         # Also expose the base functionality for custom use
         baseLib = baseLib;
       }
-    );
+    )
+    // {
+      # Top-level language-specific simplified flake builders
+      lib =
+        builtins.mapAttrs
+          (
+            langName: _:
+            let
+              mkLangFlake =
+                self:
+                {
+                  description ? null,
+                  pname ? null,
+                  version ? "0.1.0",
+                  jdk ? "jdk21",
+                  extraArgs ? { },
+                }:
+                flake-utils.lib.eachDefaultSystem (
+                  system:
+                  let
+                    pkgs = nixpkgs.legacyPackages.${system};
+                    base = import ./lib/base.nix { inherit pkgs; };
+                    buildFunctions = import ./lib/build-functions.nix { inherit pkgs; };
+                    baseLib = base // {
+                      inherit buildFunctions;
+                      mkJustfile = base.mkJustfile self;
+                    };
+
+                    langConfig = import ./languages/${langName}.nix {
+                      inherit pkgs;
+                      base = baseLib;
+                      justfilePath = ./justfiles/${langName}.justfile;
+                    };
+
+                    # Use self.description or provided description
+                    finalDescription =
+                      if description != null then
+                        description
+                      else if self ? description then
+                        self.description
+                      else
+                        "Unnamed ${langName} solution";
+
+                    # Use self.outPath as source
+                    src = self.outPath;
+
+                    # Extract last two path segments for default pname
+                    pathStr = toString src;
+                    pathParts = pkgs.lib.strings.splitString "/" pathStr;
+                    # Filter out empty strings and take last 2
+                    nonEmptyParts = builtins.filter (x: x != "") pathParts;
+                    numParts = builtins.length nonEmptyParts;
+                    lastTwo =
+                      if numParts >= 2 then
+                        [
+                          (builtins.elemAt nonEmptyParts (numParts - 2))
+                          (builtins.elemAt nonEmptyParts (numParts - 1))
+                        ]
+                      else
+                        nonEmptyParts;
+                    defaultPname = builtins.concatStringsSep "-" lastTwo;
+                    finalPname = if pname != null then pname else defaultPname;
+
+                    # Prepare extra arguments with JDK for JVM languages
+                    jvmLanguages = [
+                      "java"
+                      "kotlin"
+                      "scala"
+                    ];
+                    isJvmLang = builtins.elem langName jvmLanguages;
+                    finalExtraArgs = extraArgs // (if isJvmLang then { inherit jdk; } else { });
+                  in
+                  langConfig.mkStandardOutputs (
+                    {
+                      inherit src version;
+                      pname = finalPname;
+                    }
+                    // finalExtraArgs
+                  )
+                );
+            in
+            {
+              mkSimpleFlake = mkLangFlake;
+            }
+          )
+          {
+            java = null;
+            kotlin = null;
+            scala = null;
+            rust = null;
+            python = null;
+            c = null;
+            cpp = null;
+            go = null;
+            haskell = null;
+            javascript = null;
+            typescript = null;
+            d = null;
+            swift = null;
+            zig = null;
+            nim = null;
+            elixir = null;
+            dart = null;
+            csharp = null;
+            cobol = null;
+            r = null;
+            php = null;
+            lua = null;
+            perl = null;
+            ruby = null;
+            ocaml = null;
+            clojure = null;
+            lisp = null;
+            fortran = null;
+            ada = null;
+            tcl = null;
+          };
+    };
 }
