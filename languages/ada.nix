@@ -9,7 +9,8 @@ let
     emoji = "🏛️";
     languageTools = with pkgs; [
       gnat-bootstrap
-      gprbuild
+      # Note: gprbuild removed as it depends on full gnat compiler
+      # which fails to build from source. gnatmake is sufficient for AOC.
     ];
     extraShellHook =
       if justfilePath != null then
