@@ -297,7 +297,17 @@
             # Extract last two path segments for default pname
             pathStr = toString src;
             pathParts = pkgs.lib.strings.splitString "/" pathStr;
-            lastTwo = pkgs.lib.lists.takeLast 2 pathParts;
+            # Filter out empty strings and take last 2
+            nonEmptyParts = builtins.filter (x: x != "") pathParts;
+            numParts = builtins.length nonEmptyParts;
+            lastTwo =
+              if numParts >= 2 then
+                [
+                  (builtins.elemAt nonEmptyParts (numParts - 2))
+                  (builtins.elemAt nonEmptyParts (numParts - 1))
+                ]
+              else
+                nonEmptyParts;
             defaultPname = builtins.concatStringsSep "-" lastTwo;
             finalPname = if pname != null then pname else defaultPname;
           in
