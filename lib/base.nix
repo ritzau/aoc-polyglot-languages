@@ -142,4 +142,36 @@ in
       else
         { }
     );
+
+  # Simplified flake template that reduces boilerplate
+  mkSimpleFlake =
+    languages: flake-utils: src:
+    {
+      description,
+      language,
+      pname ? null,
+      version ? "0.1.0",
+      extraArgs ? { },
+    }:
+    let
+      # Extract last two path segments for default pname
+      pathStr = toString src;
+      pathParts = pkgs.lib.strings.splitString "/" pathStr;
+      lastTwo = pkgs.lib.lists.takeLast 2 pathParts;
+      defaultPname = builtins.concatStringsSep "-" lastTwo;
+      finalPname = if pname != null then pname else defaultPname;
+
+      # Get the language configuration
+      langConfig = languages.${language} or (throw "Language '${language}' not found");
+    in
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      langConfig.mkStandardOutputs (
+        {
+          inherit src version;
+          pname = finalPname;
+        }
+        // extraArgs
+      )
+    );
 }

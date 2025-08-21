@@ -217,9 +217,14 @@
         // builtins.mapAttrs (_: lang: lang.devShell) languages;
 
         # Expose solution builders for each language
-        lib = builtins.mapAttrs (_: lang: {
-          mkStandardOutputs = lang.mkStandardOutputs;
-        }) languages;
+        lib =
+          builtins.mapAttrs (_: lang: {
+            mkStandardOutputs = lang.mkStandardOutputs;
+          }) languages
+          // {
+            # Simplified flake template
+            mkSimpleFlake = base.mkSimpleFlake languages flake-utils;
+          };
 
         # Expose justfiles for each language
         justfiles = {
