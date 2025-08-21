@@ -29,11 +29,31 @@ let
     args:
     base.mkSolution {
       language = "nim";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.nim;
-        fileExtensions = [ "nim" ];
-        compileCmd = "nim compile --verbosity:0 -o:hello-nim *.nim";
-      } (args // { pkgs = pkgs; });
+      package =
+        (
+          {
+            pkgs,
+            src ? ./.,
+            pname,
+            ...
+          }@buildArgs:
+          pkgs.stdenv.mkDerivation {
+            inherit pname src;
+            version = "0.1.0";
+            nativeBuildInputs = [ pkgs.nim ];
+            # Set up a proper cache directory for Nim
+            buildPhase = ''
+              export HOME=$TMPDIR
+              mkdir -p $HOME/.cache/nim
+              nim compile --verbosity:0 -o:${pname} *.nim
+            '';
+            installPhase = ''
+              mkdir -p $out/bin
+              cp ${pname} $out/bin/
+            '';
+          }
+        )
+          (args // { pkgs = pkgs; });
     };
 in
 {

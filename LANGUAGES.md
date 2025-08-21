@@ -2,35 +2,39 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (21)
+## ✅ Working Languages (25)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
-| Language    | Status     | Test Result                     |
-| ----------- | ---------- | ------------------------------- |
-| **C**       | ✅ Working | "Hello, World from C! 🔧"       |
-| **C++**     | ✅ Working | "Hello, World from C++! ⚡"     |
-| **Clojure** | ✅ Working | "Hello, World from Clojure! 🔁" |
-| **D**       | ✅ Working | "Hello, World from D! 🎯"       |
-| **Elixir**  | ✅ Working | "Hello, World from Elixir! 💧"  |
-| **Fortran** | ✅ Working | "Hello, World from Fortran! 🏗️" |
-| **Go**      | ✅ Working | "Hello, World from Go! 🐹"      |
-| **Haskell** | ✅ Working | "Hello, World from Haskell! λ"  |
-| **Java**    | ✅ Working | "Hello, World from Java! ☕"    |
-| **Kotlin**  | ✅ Working | "Hello, World from Kotlin! 🎯"  |
-| **Lisp**    | ✅ Working | "Hello, World from Lisp! 🔥"    |
-| **OCaml**   | ✅ Working | "Hello, World from OCaml! 🐫"   |
-| **Perl**    | ✅ Working | "Hello, World from Perl! 🐪"    |
-| **PHP**     | ✅ Working | "Hello, World from PHP! 🐘"     |
-| **R**       | ✅ Working | "Hello, World from R! 📊"       |
-| **Ruby**    | ✅ Working | "Hello, World from Ruby! 💎"    |
-| **Rust**    | ✅ Working | "Hello, World from Rust! 🦀"    |
-| **Scala**   | ✅ Working | "Hello, World from Scala! 🎭"   |
-| **Swift**   | ✅ Working | "Hello, World from Swift! 🦉"   |
-| **Tcl**     | ✅ Working | "Hello, World from Tcl! 🪶"     |
-| **Zig**     | ✅ Working | "Hello, World from Zig! ⚡"     |
+| Language       | Status     | Test Result                        |
+| -------------- | ---------- | ---------------------------------- |
+| **C**          | ✅ Working | "Hello, World from C! 🔧"          |
+| **C++**        | ✅ Working | "Hello, World from C++! ⚡"        |
+| **Clojure**    | ✅ Working | "Hello, World from Clojure! 🔁"    |
+| **D**          | ✅ Working | "Hello, World from D! 🎯"          |
+| **Elixir**     | ✅ Working | "Hello, World from Elixir! 💧"     |
+| **Fortran**    | ✅ Working | "Hello, World from Fortran! 🏗️"    |
+| **Go**         | ✅ Working | "Hello, World from Go! 🐹"         |
+| **Haskell**    | ✅ Working | "Hello, World from Haskell! λ"     |
+| **Java**       | ✅ Working | "Hello, World from Java! ☕"       |
+| **JavaScript** | ✅ Working | "Hello, World from JavaScript! 🟨" |
+| **Kotlin**     | ✅ Working | "Hello, World from Kotlin! 🎯"     |
+| **Lisp**       | ✅ Working | "Hello, World from Lisp! 🔥"       |
+| **Nim**        | ✅ Working | "Hello, World from Nim! 👑"        |
+| **OCaml**      | ✅ Working | "Hello, World from OCaml! 🐫"      |
+| **Perl**       | ✅ Working | "Hello, World from Perl! 🐪"       |
+| **PHP**        | ✅ Working | "Hello, World from PHP! 🐘"        |
+| **Python**     | ✅ Working | "Hello, World from Python! 🐍"     |
+| **R**          | ✅ Working | "Hello, World from R! 📊"          |
+| **Ruby**       | ✅ Working | "Hello, World from Ruby! 💎"       |
+| **Rust**       | ✅ Working | "Hello, World from Rust! 🦀"       |
+| **Scala**      | ✅ Working | "Hello, World from Scala! 🎭"      |
+| **Swift**      | ✅ Working | "Hello, World from Swift! 🦉"      |
+| **Tcl**        | ✅ Working | "Hello, World from Tcl! 🪶"        |
+| **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
+| **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
 
-## ❌ Known Issues (12)
+## ❌ Known Issues (8)
 
 ### Linux-Only Languages (3)
 
@@ -42,38 +46,35 @@ These languages are only available on Linux platforms:
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
-### Build Configuration Issues (9)
+### Build Configuration Issues (5)
 
 These languages have build or runtime configuration problems:
 
-| Language       | Issue                  | Error                                                           |
-| -------------- | ---------------------- | --------------------------------------------------------------- |
-| **Ada**        | Missing name attribute | `attribute 'name' missing`                                      |
-| **C#**         | Binary format issue    | `Exec format error`                                             |
-| **COBOL**      | Build failure          | gnucobol documentation build failed                             |
-| **Dart**       | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **JavaScript** | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Lua**        | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Nim**        | Cache directory issue  | `cannot create directory: /homeless-shelter/.cache/nim`         |
-| **Python**     | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **TypeScript** | Missing Node.js        | `node: command not found`                                       |
+| Language  | Issue                  | Error                                                           |
+| --------- | ---------------------- | --------------------------------------------------------------- |
+| **Ada**   | Missing name attribute | `attribute 'name' missing`                                      |
+| **C#**    | Binary format issue    | `Exec format error`                                             |
+| **COBOL** | Build failure          | gnucobol documentation build failed                             |
+| **Dart**  | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| **Lua**   | Missing name parameter | `writeShellApplication called without required argument 'name'` |
 
 ## Testing Information
 
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 21 (64%)
-- **Known Issues:** 12 (36%)
-- **Success Rate:** 64%
+- **Working:** 25 (76%)
+- **Known Issues:** 8 (24%)
+- **Success Rate:** 76%
 
 **Test Environment:**
 
 - Platform: macOS (Darwin)
-- Date: 2025-08-20
-- Flake Version: ad43672a5bcf13334675245f2143450b207f1454
-- Method: Systematic testing using `nix run` with 5-minute timeouts
-- Result: All tests completed within timeout period
+- Date: 2025-08-21
+- Flake Version: 51fc0f259151ca0a1c28b30ac89b4437787cc141
+- Method: Systematic testing using `nix run` and `nix build`
+- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration
+- Result: All recent fixes use mkDefaultOutputs API with typed parameters
 
 ## Complete Language List
 
@@ -244,8 +245,10 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **All Languages**: Use unified build system with `nix build`/`nix run`
-- **All Languages**: Have consistent `just` command interface
+- **Working Languages**: 25 (76%) fully functional for AOC challenges
+- **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
+- **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples
-- **All Languages**: Use 6-8 line ultra-minimal solution flakes
-- **Working Languages**: 14 (42%) fully functional for AOC challenges
+- **All Languages**: Use minimal 15-line flake configurations
+- **Recent Improvements**: Fixed JavaScript/TypeScript Node.js issues, Nim cache, Python configuration
+- **API Migration**: All working languages now use simplified `mkDefaultOutputs` pattern

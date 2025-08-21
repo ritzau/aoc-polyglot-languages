@@ -30,11 +30,36 @@ let
     args:
     base.mkSolution {
       language = "typescript";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.typescript;
-        fileExtensions = [ "ts" ];
-        compileCmd = "tsc *.ts --outDir dist && node dist/*.js";
-      } (args // { pkgs = pkgs; });
+      package =
+        (
+          {
+            pkgs,
+            src ? ./.,
+            pname,
+            ...
+          }@buildArgs:
+          pkgs.stdenv.mkDerivation {
+            inherit pname src;
+            version = "0.1.0";
+            nativeBuildInputs = [
+              pkgs.typescript
+              pkgs.nodejs_20
+            ];
+            buildPhase = ''
+              tsc *.ts --outDir dist
+            '';
+            installPhase = ''
+              mkdir -p $out/bin
+              echo '#!/usr/bin/env bash' > $out/bin/${pname}
+              echo 'exec ${pkgs.nodejs_20}/bin/node ${placeholder "out"}/lib/*.js "$@"' >> $out/bin/${pname}
+              chmod +x $out/bin/${pname}
+
+              mkdir -p $out/lib
+              cp dist/*.js $out/lib/
+            '';
+          }
+        )
+          (args // { pkgs = pkgs; });
     };
 in
 {
