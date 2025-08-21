@@ -2,7 +2,7 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (25)
+## ✅ Working Languages (27)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
@@ -12,6 +12,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **C++**        | ✅ Working | "Hello, World from C++! ⚡"        |
 | **Clojure**    | ✅ Working | "Hello, World from Clojure! 🔁"    |
 | **D**          | ✅ Working | "Hello, World from D! 🎯"          |
+| **Dart**       | ✅ Working | "Hello, World from Dart! 🎯"       |
 | **Elixir**     | ✅ Working | "Hello, World from Elixir! 💧"     |
 | **Fortran**    | ✅ Working | "Hello, World from Fortran! 🏗️"    |
 | **Go**         | ✅ Working | "Hello, World from Go! 🐹"         |
@@ -20,6 +21,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **JavaScript** | ✅ Working | "Hello, World from JavaScript! 🟨" |
 | **Kotlin**     | ✅ Working | "Hello, World from Kotlin! 🎯"     |
 | **Lisp**       | ✅ Working | "Hello, World from Lisp! 🔥"       |
+| **Lua**        | ✅ Working | "Hello, World from Lua! 🌙"        |
 | **Nim**        | ✅ Working | "Hello, World from Nim! 👑"        |
 | **OCaml**      | ✅ Working | "Hello, World from OCaml! 🐫"      |
 | **Perl**       | ✅ Working | "Hello, World from Perl! 🐪"       |
@@ -34,7 +36,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
 | **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
 
-## ❌ Known Issues (8)
+## ❌ Known Issues (6)
 
 ### Linux-Only Languages (3)
 
@@ -46,26 +48,24 @@ These languages are only available on Linux platforms:
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
-### Build Configuration Issues (5)
+### Build Configuration Issues (3)
 
 These languages have build or runtime configuration problems:
 
-| Language  | Issue                  | Error                                                           |
-| --------- | ---------------------- | --------------------------------------------------------------- |
-| **Ada**   | Missing name attribute | `attribute 'name' missing`                                      |
-| **C#**    | Binary format issue    | `Exec format error`                                             |
-| **COBOL** | Build failure          | gnucobol documentation build failed                             |
-| **Dart**  | Missing name parameter | `writeShellApplication called without required argument 'name'` |
-| **Lua**   | Missing name parameter | `writeShellApplication called without required argument 'name'` |
+| Language  | Issue                  | Error                               |
+| --------- | ---------------------- | ----------------------------------- |
+| **Ada**   | Missing name attribute | `attribute 'name' missing`          |
+| **C#**    | Binary format issue    | `Exec format error`                 |
+| **COBOL** | Build failure          | gnucobol documentation build failed |
 
 ## Testing Information
 
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 25 (76%)
-- **Known Issues:** 8 (24%)
-- **Success Rate:** 76%
+- **Working:** 27 (82%)
+- **Known Issues:** 6 (18%)
+- **Success Rate:** 82%
 
 **Test Environment:**
 
@@ -73,7 +73,7 @@ These languages have build or runtime configuration problems:
 - Date: 2025-08-21
 - Flake Version: 51fc0f259151ca0a1c28b30ac89b4437787cc141
 - Method: Systematic testing using `nix run` and `nix build`
-- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration
+- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration, Lua/Dart API migration
 - Result: All recent fixes use mkDefaultOutputs API with typed parameters
 
 ## Complete Language List
@@ -245,7 +245,7 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **Working Languages**: 25 (76%) fully functional for AOC challenges
+- **Working Languages**: 27 (82%) fully functional for AOC challenges
 - **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
 - **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples
