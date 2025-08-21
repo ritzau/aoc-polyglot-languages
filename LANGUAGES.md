@@ -2,7 +2,7 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (27)
+## ✅ Working Languages (28)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
@@ -19,6 +19,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **Haskell**    | ✅ Working | "Hello, World from Haskell! λ"     |
 | **Java**       | ✅ Working | "Hello, World from Java! ☕"       |
 | **JavaScript** | ✅ Working | "Hello, World from JavaScript! 🟨" |
+| **Julia**      | ✅ Working | "Hello, World from Julia! 🔢"      |
 | **Kotlin**     | ✅ Working | "Hello, World from Kotlin! 🎯"     |
 | **Lisp**       | ✅ Working | "Hello, World from Lisp! 🔥"       |
 | **Lua**        | ✅ Working | "Hello, World from Lua! 🌙"        |
@@ -36,15 +37,14 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
 | **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
 
-## ❌ Known Issues (6)
+## ❌ Known Issues (5)
 
-### Linux-Only Languages (3)
+### Linux-Only Languages (2)
 
 These languages are only available on Linux platforms:
 
 | Language        | Issue      | Error                           |
 | --------------- | ---------- | ------------------------------- |
-| **Julia**       | Linux-only | `attribute 'julia' missing`     |
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
@@ -63,9 +63,9 @@ These languages have build or runtime configuration problems:
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 27 (82%)
-- **Known Issues:** 6 (18%)
-- **Success Rate:** 82%
+- **Working:** 28 (85%)
+- **Known Issues:** 5 (15%)
+- **Success Rate:** 85%
 
 **Test Environment:**
 
@@ -73,7 +73,7 @@ These languages have build or runtime configuration problems:
 - Date: 2025-08-21
 - Flake Version: 51fc0f259151ca0a1c28b30ac89b4437787cc141
 - Method: Systematic testing using `nix run` and `nix build`
-- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration, Lua/Dart API migration
+- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration, Lua/Dart API migration, Julia macOS support
 - Result: All recent fixes use mkDefaultOutputs API with typed parameters
 
 ## Complete Language List
@@ -125,7 +125,7 @@ These languages have build or runtime configuration problems:
 ### Modern Languages
 
 - **Dart** 🎯 - Dart SDK for cross-platform development
-- **Julia** 🔢 - Julia for scientific computing
+- **Julia** 🔢 - Julia for scientific computing (macOS: binary distribution)
 
 ### Object-Oriented
 
@@ -245,7 +245,7 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **Working Languages**: 27 (82%) fully functional for AOC challenges
+- **Working Languages**: 28 (85%) fully functional for AOC challenges
 - **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
 - **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples
