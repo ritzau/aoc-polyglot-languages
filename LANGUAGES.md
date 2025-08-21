@@ -2,7 +2,7 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (29)
+## ✅ Working Languages (30)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
@@ -10,6 +10,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | -------------- | ---------- | ---------------------------------- |
 | **Ada**        | ✅ Working | "Hello, World from Ada! 🏛️"        |
 | **C**          | ✅ Working | "Hello, World from C! 🔧"          |
+| **C#**         | ✅ Working | "Hello, World from C#! 🔷"         |
 | **C++**        | ✅ Working | "Hello, World from C++! ⚡"        |
 | **Clojure**    | ✅ Working | "Hello, World from Clojure! 🔁"    |
 | **D**          | ✅ Working | "Hello, World from D! 🎯"          |
@@ -38,7 +39,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
 | **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
 
-## ❌ Known Issues (4)
+## ❌ Known Issues (3)
 
 ### Linux-Only Languages (2)
 
@@ -49,23 +50,22 @@ These languages are only available on Linux platforms:
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
-### Build Configuration Issues (2)
+### Build Configuration Issues (1)
 
 These languages have build or runtime configuration problems:
 
-| Language  | Issue               | Error                               |
-| --------- | ------------------- | ----------------------------------- |
-| **C#**    | Binary format issue | `Exec format error`                 |
-| **COBOL** | Build failure       | gnucobol documentation build failed |
+| Language  | Issue         | Error                               |
+| --------- | ------------- | ----------------------------------- |
+| **COBOL** | Build failure | gnucobol documentation build failed |
 
 ## Testing Information
 
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 29 (88%)
-- **Known Issues:** 4 (12%)
-- **Success Rate:** 88%
+- **Working:** 30 (91%)
+- **Known Issues:** 3 (9%)
+- **Success Rate:** 91%
 
 **Test Environment:**
 
@@ -119,7 +119,7 @@ These languages have build or runtime configuration problems:
 
 ### Enterprise & Legacy
 
-- **C#** 💼 - .NET runtime and compiler
+- **C#** 🔷 - .NET SDK with dotnet toolchain
 - **COBOL** 🏢 - GnuCOBOL compiler for legacy systems
 
 ### Modern Languages
@@ -245,7 +245,7 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **Working Languages**: 29 (88%) fully functional for AOC challenges
+- **Working Languages**: 30 (91%) fully functional for AOC challenges
 - **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
 - **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples

@@ -184,14 +184,14 @@
             base = baseLib;
             justfilePath = ./justfiles/julia.justfile;
           };
-        }
-        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
-          # Linux-only languages due to package availability
           objc = import ./languages/objc.nix {
             inherit pkgs;
             base = baseLib;
             justfilePath = ./justfiles/objc.justfile;
           };
+        }
+        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
+          # Linux-only languages due to package availability
           smalltalk = import ./languages/smalltalk.nix {
             inherit pkgs;
             base = baseLib;
@@ -255,10 +255,10 @@
           ada = ./justfiles/ada.justfile;
           tcl = ./justfiles/tcl.justfile;
           julia = ./justfiles/julia.justfile;
+          objc = ./justfiles/objc.justfile;
         }
         // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
           # Linux-only language justfiles
-          objc = ./justfiles/objc.justfile;
           smalltalk = ./justfiles/smalltalk.justfile;
         };
 
