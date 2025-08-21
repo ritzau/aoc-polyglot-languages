@@ -46,18 +46,16 @@ All currently supported languages are working perfectly!
 
 ## 🔮 **Future Language Possibilities**
 
-These languages were temporarily removed from active support but could be re-enabled in the future:
+### Recently Deferred (2)
 
-### Languages with Build Complexity (2)
+These languages were temporarily removed from active support:
 
-| Language      | Status              | Issue                                       | Notes                                  |
-| ------------- | ------------------- | ------------------------------------------- | -------------------------------------- |
-| **COBOL**     | Slow build time     | gnucobol requires massive TeX documentation | ~10+ minute first build, then works    |
-| **Smalltalk** | Platform limitation | Linux-only package availability             | Could be made cross-platform like ObjC |
+- **COBOL**: Technically working but requires 10+ minute initial build due to TeX dependencies
+- **Smalltalk**: Linux-only package availability (could be made cross-platform like Objective-C)
 
-**COBOL**: Technically working but requires 10+ minutes for initial build due to TeXLive documentation dependencies. The language definition supports both mkStandardOutputs and mkDefaultOutputs APIs and has optimized build flags.
+### Additional Possibilities
 
-**Smalltalk**: Currently Linux-only due to package availability. Could potentially be made cross-platform similar to how Objective-C was implemented with platform-specific toolchains.
+See the comprehensive list of potential future languages in the [main LANGUAGES.md documentation](../aoc-nix/LANGUAGES.md#potential-future-languages) including Prolog, Racket, Crystal, F#, and many others available in nixpkgs.
 
 ## Testing Information
 
