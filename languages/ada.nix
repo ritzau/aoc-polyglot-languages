@@ -8,7 +8,7 @@ let
     name = "Ada";
     emoji = "🏛️";
     languageTools = with pkgs; [
-      gnat
+      gnat-bootstrap
       gprbuild
     ];
     extraShellHook =
@@ -31,7 +31,7 @@ let
     base.mkSolution {
       language = "ada";
       package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.gnat;
+        compiler = pkgs.gnat-bootstrap;
         fileExtensions = [ "adb" ];
         compileCmd = ''
           # Find the ada file in the source directory
