@@ -275,7 +275,7 @@
             langName: _:
             let
               mkLangFlake =
-                self:
+                src:
                 {
                   description ? null,
                   pname ? null,
@@ -300,17 +300,8 @@
                       justfilePath = ./justfiles/${langName}.justfile;
                     };
 
-                    # Use self.description or provided description
-                    finalDescription =
-                      if description != null then
-                        description
-                      else if self ? description then
-                        self.description
-                      else
-                        "Unnamed ${langName} solution";
-
-                    # Use self.outPath as source
-                    src = self.outPath;
+                    # Description defaults to "Unnamed solution" if not provided
+                    finalDescription = if description != null then description else "Unnamed ${langName} solution";
 
                     # Extract last two path segments for default pname
                     pathStr = toString src;
