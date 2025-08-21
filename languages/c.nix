@@ -32,10 +32,14 @@ let
 
   solution =
     args:
+    let
+      # Extract compiler from args, default to gcc
+      selectedCompiler = args.gcc or pkgs.gcc;
+    in
     base.mkSolution {
       language = "c";
       package = base.buildFunctions.makeBuild {
-        buildInputs = with pkgs; [ gcc ];
+        buildInputs = [ selectedCompiler ];
       } (args // { pkgs = pkgs; });
     };
 in

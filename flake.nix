@@ -213,14 +213,12 @@
               echo "Run 'nix develop .#<language>' to enter specific language shells"
             '';
           };
-        }
-        // builtins.mapAttrs (_: lang: lang.devShell) languages;
+        };
 
         # Expose solution builders for each language
         lib = builtins.mapAttrs (langName: lang: {
           mkStandardOutputs = lang.mkStandardOutputs;
-          # Language-specific simplified flake template
-          mkSimpleFlake = base.mkLanguageSimpleFlake langName lang flake-utils;
+          # mkSimpleFlake is now provided at top-level lib only
         }) languages;
 
         # Expose justfiles for each language
@@ -275,12 +273,14 @@
             langName: _:
             let
               mkLangFlake =
-                self:
                 {
-                  src ? ./.,
+                  src,
+                  description ? null,
                   pname ? null,
                   version ? "0.1.0",
-                  jdk ? "jdk21",
+                  jdk ? null,
+                  gcc ? null,
+                  python ? null,
                   extraArgs ? { },
                 }:
                 flake-utils.lib.eachDefaultSystem (
@@ -300,11 +300,14 @@
                       justfilePath = ./justfiles/${langName}.justfile;
                     };
 
-                    # Auto-extract description from self.description
-                    finalDescription = self.description or "Unnamed ${langName} solution";
+                    # Use provided description or default
+                    finalDescription = if description != null then description else "Unnamed ${langName} solution";
+
+                    # Use the explicitly passed src parameter
+                    finalSrc = src;
 
                     # Extract last two path segments for default pname
-                    pathStr = toString src;
+                    pathStr = toString finalSrc;
                     pathParts = pkgs.lib.strings.splitString "/" pathStr;
                     # Filter out empty strings and take last 2
                     nonEmptyParts = builtins.filter (x: x != "") pathParts;
@@ -320,18 +323,43 @@
                     defaultPname = builtins.concatStringsSep "-" lastTwo;
                     finalPname = if pname != null then pname else defaultPname;
 
-                    # Prepare extra arguments with JDK for JVM languages
+                    # Prepare extra arguments for different language types
                     jvmLanguages = [
                       "java"
                       "kotlin"
                       "scala"
                     ];
+                    cLanguages = [
+                      "c"
+                    ];
+                    pythonLanguages = [
+                      "python"
+                    ];
+
                     isJvmLang = builtins.elem langName jvmLanguages;
-                    finalExtraArgs = extraArgs // (if isJvmLang then { inherit jdk; } else { });
+                    isCLang = builtins.elem langName cLanguages;
+                    isPythonLang = builtins.elem langName pythonLanguages;
+
+                    finalJdk = if jdk != null then jdk else pkgs.jdk21;
+                    finalGcc = if gcc != null then gcc else pkgs.gcc;
+                    finalPython = if python != null then python else pkgs.python311;
+
+                    languageSpecificArgs =
+                      if isJvmLang then
+                        { jdk = finalJdk; }
+                      else if isCLang then
+                        { gcc = finalGcc; }
+                      else if isPythonLang then
+                        { python = finalPython; }
+                      else
+                        { };
+
+                    finalExtraArgs = extraArgs // languageSpecificArgs;
                   in
                   langConfig.mkStandardOutputs (
                     {
-                      inherit src version;
+                      src = finalSrc;
+                      inherit version;
                       pname = finalPname;
                     }
                     // finalExtraArgs
@@ -339,7 +367,7 @@
                 );
             in
             {
-              mkSimpleFlake = mkLangFlake;
+              mkDefaultOutputs = mkLangFlake;
             }
           )
           {
