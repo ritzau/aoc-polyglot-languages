@@ -2,12 +2,13 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (28)
+## ✅ Working Languages (29)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
 | Language       | Status     | Test Result                        |
 | -------------- | ---------- | ---------------------------------- |
+| **Ada**        | ✅ Working | "Hello, World from Ada! 🏛️"        |
 | **C**          | ✅ Working | "Hello, World from C! 🔧"          |
 | **C++**        | ✅ Working | "Hello, World from C++! ⚡"        |
 | **Clojure**    | ✅ Working | "Hello, World from Clojure! 🔁"    |
@@ -37,7 +38,7 @@ These languages are fully functional and ready for Advent of Code challenges:
 | **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
 | **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
 
-## ❌ Known Issues (5)
+## ❌ Known Issues (4)
 
 ### Linux-Only Languages (2)
 
@@ -48,24 +49,23 @@ These languages are only available on Linux platforms:
 | **Objective-C** | Linux-only | `attribute 'objc' missing`      |
 | **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
 
-### Build Configuration Issues (3)
+### Build Configuration Issues (2)
 
 These languages have build or runtime configuration problems:
 
-| Language  | Issue                  | Error                               |
-| --------- | ---------------------- | ----------------------------------- |
-| **Ada**   | Missing name attribute | `attribute 'name' missing`          |
-| **C#**    | Binary format issue    | `Exec format error`                 |
-| **COBOL** | Build failure          | gnucobol documentation build failed |
+| Language  | Issue               | Error                               |
+| --------- | ------------------- | ----------------------------------- |
+| **C#**    | Binary format issue | `Exec format error`                 |
+| **COBOL** | Build failure       | gnucobol documentation build failed |
 
 ## Testing Information
 
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 28 (85%)
-- **Known Issues:** 5 (15%)
-- **Success Rate:** 85%
+- **Working:** 29 (88%)
+- **Known Issues:** 4 (12%)
+- **Success Rate:** 88%
 
 **Test Environment:**
 
@@ -73,7 +73,7 @@ These languages have build or runtime configuration problems:
 - Date: 2025-08-21
 - Flake Version: 51fc0f259151ca0a1c28b30ac89b4437787cc141
 - Method: Systematic testing using `nix run` and `nix build`
-- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration, Lua/Dart API migration, Julia macOS support
+- Recent Fixes: JavaScript/TypeScript build issues, Nim cache directory, Python configuration, Lua/Dart API migration, Julia macOS support, Ada API migration
 - Result: All recent fixes use mkDefaultOutputs API with typed parameters
 
 ## Complete Language List
@@ -89,7 +89,7 @@ These languages have build or runtime configuration problems:
 - **D** 🎯 - DMD compiler with DUB package manager
 - **Swift** 🐦 - Swift compiler (macOS/Linux)
 - **Fortran** 🏗️ - gfortran compiler for scientific computing
-- **Ada** 🏛️ - GNAT compiler for safety-critical systems
+- **Ada** 🏛️ - GNAT bootstrap compiler for safety-critical systems
 
 ### JVM Ecosystem
 
@@ -245,7 +245,7 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **Working Languages**: 28 (85%) fully functional for AOC challenges
+- **Working Languages**: 29 (88%) fully functional for AOC challenges
 - **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
 - **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples
