@@ -8,7 +8,7 @@ let
     name = "Julia";
     emoji = "🔢";
     languageTools = with pkgs; [
-      julia
+      julia-bin
     ];
     extraShellHook =
       if justfilePath != null then
@@ -31,7 +31,7 @@ let
       language = "julia";
       package = pkgs.writeShellApplication {
         name = args.pname or "hello-julia";
-        runtimeInputs = [ pkgs.julia ];
+        runtimeInputs = [ pkgs.julia-bin ];
         text = ''
           # Find the julia file in the source directory
           juliafile=$(find ${args.src or ./.} -maxdepth 1 -name "*.jl" | head -1)
@@ -47,4 +47,5 @@ let
 in
 {
   mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
+  mkDefaultOutputs = args: (solution args) // { devShells.default = devShell; };
 }

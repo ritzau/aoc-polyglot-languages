@@ -179,14 +179,14 @@
             base = baseLib;
             justfilePath = ./justfiles/tcl.justfile;
           };
-        }
-        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
-          # Linux-only languages due to package availability
           julia = import ./languages/julia.nix {
             inherit pkgs;
             base = baseLib;
             justfilePath = ./justfiles/julia.justfile;
           };
+        }
+        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
+          # Linux-only languages due to package availability
           objc = import ./languages/objc.nix {
             inherit pkgs;
             base = baseLib;
@@ -218,6 +218,7 @@
         # Expose solution builders for each language
         lib = builtins.mapAttrs (langName: lang: {
           mkStandardOutputs = lang.mkStandardOutputs;
+          mkDefaultOutputs = lang.mkDefaultOutputs or lang.mkStandardOutputs;
           # mkSimpleFlake is now provided at top-level lib only
         }) languages;
 
@@ -253,10 +254,10 @@
           fortran = ./justfiles/fortran.justfile;
           ada = ./justfiles/ada.justfile;
           tcl = ./justfiles/tcl.justfile;
+          julia = ./justfiles/julia.justfile;
         }
         // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
           # Linux-only language justfiles
-          julia = ./justfiles/julia.justfile;
           objc = ./justfiles/objc.justfile;
           smalltalk = ./justfiles/smalltalk.justfile;
         };
@@ -401,6 +402,7 @@
             fortran = null;
             ada = null;
             tcl = null;
+            julia = null;
           };
     };
 }
