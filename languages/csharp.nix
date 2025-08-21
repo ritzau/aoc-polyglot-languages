@@ -9,7 +9,7 @@ let
     emoji = "🔷";
     languageTools = with pkgs; [
       dotnet-sdk_8
-      mono
+      # Note: mono removed in favor of modern .NET SDK
       omnisharp-roslyn
     ];
     extraShellHook =
@@ -31,13 +31,34 @@ let
     args:
     base.mkSolution {
       language = "csharp";
-      package = base.buildFunctions.simpleCompiler {
-        compiler = pkgs.mono;
-        fileExtensions = [ "cs" ];
-        compileCmd = "mcs -out:hello-csharp.exe *.cs";
-      } (args // { pkgs = pkgs; });
+      package = pkgs.writeShellApplication {
+        name = args.pname or "hello-csharp";
+        runtimeInputs = [ pkgs.dotnet-sdk_8 ];
+        text = ''
+          # Create temporary directory for .NET project
+          tmpdir=$(mktemp -d)
+          cd "$tmpdir"
+
+          # Find C# source file
+          srcfile=$(find ${args.src or ./.} -maxdepth 1 -name "*.cs" | head -1)
+          if [ -z "$srcfile" ]; then
+            echo "No .cs files found in ${args.src or ./.}"
+            exit 1
+          fi
+
+          # Create a minimal .NET project
+          dotnet new console --force --use-program-main
+
+          # Copy our source file over the template
+          cp "$srcfile" Program.cs
+
+          # Run the program
+          exec dotnet run "$@"
+        '';
+      };
     };
 in
 {
   mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
+  mkDefaultOutputs = args: (solution args) // { devShells.default = devShell; };
 }
