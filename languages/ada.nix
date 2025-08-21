@@ -63,4 +63,5 @@ let
 in
 {
   mkStandardOutputs = args: (solution args) // { devShells.default = devShell; };
+  mkDefaultOutputs = args: (solution args) // { devShells.default = devShell; };
 }
