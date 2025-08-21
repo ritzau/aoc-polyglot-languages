@@ -143,26 +143,54 @@ in
         { }
     );
 
-  # Simplified flake template that reduces boilerplate
-  mkSimpleFlake =
-    languages: flake-utils: src:
+  # Language-specific simplified flake template
+  mkLanguageSimpleFlake =
+    language: langConfig: flake-utils: self:
     {
-      description,
-      language,
+      description ? null,
       pname ? null,
       version ? "0.1.0",
+      jdk ? "jdk21",
       extraArgs ? { },
     }:
     let
+      # Use self.description or provided description
+      finalDescription =
+        if description != null then
+          description
+        else if self ? description then
+          self.description
+        else
+          "Unnamed ${language} solution";
+
+      # Use self.outPath as source
+      src = self.outPath;
+
       # Extract last two path segments for default pname
       pathStr = toString src;
       pathParts = pkgs.lib.strings.splitString "/" pathStr;
-      lastTwo = pkgs.lib.lists.takeLast 2 pathParts;
+      # Filter out empty strings and take last 2
+      nonEmptyParts = builtins.filter (x: x != "") pathParts;
+      numParts = builtins.length nonEmptyParts;
+      lastTwo =
+        if numParts >= 2 then
+          [
+            (builtins.elemAt nonEmptyParts (numParts - 2))
+            (builtins.elemAt nonEmptyParts (numParts - 1))
+          ]
+        else
+          nonEmptyParts;
       defaultPname = builtins.concatStringsSep "-" lastTwo;
       finalPname = if pname != null then pname else defaultPname;
 
-      # Get the language configuration
-      langConfig = languages.${language} or (throw "Language '${language}' not found");
+      # Prepare extra arguments with JDK for JVM languages
+      jvmLanguages = [
+        "java"
+        "kotlin"
+        "scala"
+      ];
+      isJvmLang = builtins.elem language jvmLanguages;
+      finalExtraArgs = extraArgs // (if isJvmLang then { inherit jdk; } else { });
     in
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -171,7 +199,7 @@ in
           inherit src version;
           pname = finalPname;
         }
-        // extraArgs
+        // finalExtraArgs
       )
     );
 }

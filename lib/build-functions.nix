@@ -164,6 +164,7 @@
   javaBuild =
     {
       mainClass,
+      jdk ? null,
     }:
     {
       pkgs,
@@ -171,9 +172,12 @@
       pname,
       ...
     }@args:
+    let
+      selectedJdk = if jdk != null then jdk else pkgs.jdk21;
+    in
     pkgs.writeShellApplication {
       name = pname;
-      runtimeInputs = [ pkgs.jdk21 ];
+      runtimeInputs = [ selectedJdk ];
       text = ''
         # Create temporary directory for compilation
         tmpdir=$(mktemp -d)
@@ -193,6 +197,7 @@
   kotlinBuild =
     {
       mainClass ? "HelloKt",
+      jdk ? null,
     }:
     {
       pkgs,
@@ -200,11 +205,14 @@
       pname,
       ...
     }@args:
+    let
+      selectedJdk = if jdk != null then jdk else pkgs.jdk21;
+    in
     pkgs.writeShellApplication {
       name = pname;
       runtimeInputs = [
         pkgs.kotlin
-        pkgs.jdk21
+        selectedJdk
       ];
       text = ''
         # Create temporary directory for compilation
@@ -224,6 +232,7 @@
   scalaBuild =
     {
       mainClass ? "Hello",
+      jdk ? null,
     }:
     {
       pkgs,
@@ -231,11 +240,14 @@
       pname,
       ...
     }@args:
+    let
+      selectedJdk = if jdk != null then jdk else pkgs.jdk21;
+    in
     pkgs.writeShellApplication {
       name = pname;
       runtimeInputs = [
         pkgs.scala
-        pkgs.jdk21
+        selectedJdk
         pkgs.which
       ];
       text = ''

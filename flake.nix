@@ -217,8 +217,10 @@
         // builtins.mapAttrs (_: lang: lang.devShell) languages;
 
         # Expose solution builders for each language
-        lib = builtins.mapAttrs (_: lang: {
+        lib = builtins.mapAttrs (langName: lang: {
           mkStandardOutputs = lang.mkStandardOutputs;
+          # Language-specific simplified flake template
+          mkSimpleFlake = base.mkLanguageSimpleFlake langName lang flake-utils;
         }) languages;
 
         # Expose justfiles for each language
@@ -264,60 +266,5 @@
         # Also expose the base functionality for custom use
         baseLib = baseLib;
       }
-    )
-    // {
-      # Simplified flake template available at top level
-      lib.mkSimpleFlake =
-        src:
-        {
-          description,
-          language,
-          pname ? null,
-          version ? "0.1.0",
-          extraArgs ? { },
-        }:
-        flake-utils.lib.eachDefaultSystem (
-          system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-            base = import ./lib/base.nix { inherit pkgs; };
-            buildFunctions = import ./lib/build-functions.nix { inherit pkgs; };
-            baseLib = base // {
-              inherit buildFunctions;
-              mkJustfile = base.mkJustfile self;
-            };
-
-            # Import specific language
-            langConfig = import ./languages/${language}.nix {
-              inherit pkgs;
-              base = baseLib;
-              justfilePath = ./justfiles/${language}.justfile;
-            };
-
-            # Extract last two path segments for default pname
-            pathStr = toString src;
-            pathParts = pkgs.lib.strings.splitString "/" pathStr;
-            # Filter out empty strings and take last 2
-            nonEmptyParts = builtins.filter (x: x != "") pathParts;
-            numParts = builtins.length nonEmptyParts;
-            lastTwo =
-              if numParts >= 2 then
-                [
-                  (builtins.elemAt nonEmptyParts (numParts - 2))
-                  (builtins.elemAt nonEmptyParts (numParts - 1))
-                ]
-              else
-                nonEmptyParts;
-            defaultPname = builtins.concatStringsSep "-" lastTwo;
-            finalPname = if pname != null then pname else defaultPname;
-          in
-          langConfig.mkStandardOutputs (
-            {
-              inherit src version;
-              pname = finalPname;
-            }
-            // extraArgs
-          )
-        );
-    };
+    );
 }

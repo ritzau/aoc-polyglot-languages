@@ -29,10 +29,16 @@ let
 
   solution =
     args:
+    let
+      # Extract JDK version from args, default to jdk21
+      jdkVersion = args.jdk or "jdk21";
+      selectedJdk = pkgs.${jdkVersion};
+    in
     base.mkSolution {
       language = "kotlin";
       package = base.buildFunctions.kotlinBuild {
         mainClass = "HelloKt";
+        jdk = selectedJdk;
       } (args // { pkgs = pkgs; });
     };
 in
