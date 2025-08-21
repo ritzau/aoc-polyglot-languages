@@ -403,6 +403,7 @@
             ada = null;
             tcl = null;
             julia = null;
+            objc = null;
           };
     };
 }
