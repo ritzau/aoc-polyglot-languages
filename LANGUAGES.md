@@ -2,53 +2,53 @@
 
 This document tracks the current status of all supported languages in the AOC polyglot environment, including test results and known issues.
 
-## ✅ Working Languages (30)
+## ✅ Working Languages (31)
 
 These languages are fully functional and ready for Advent of Code challenges:
 
-| Language       | Status     | Test Result                        |
-| -------------- | ---------- | ---------------------------------- |
-| **Ada**        | ✅ Working | "Hello, World from Ada! 🏛️"        |
-| **C**          | ✅ Working | "Hello, World from C! 🔧"          |
-| **C#**         | ✅ Working | "Hello, World from C#! 🔷"         |
-| **C++**        | ✅ Working | "Hello, World from C++! ⚡"        |
-| **Clojure**    | ✅ Working | "Hello, World from Clojure! 🔁"    |
-| **D**          | ✅ Working | "Hello, World from D! 🎯"          |
-| **Dart**       | ✅ Working | "Hello, World from Dart! 🎯"       |
-| **Elixir**     | ✅ Working | "Hello, World from Elixir! 💧"     |
-| **Fortran**    | ✅ Working | "Hello, World from Fortran! 🏗️"    |
-| **Go**         | ✅ Working | "Hello, World from Go! 🐹"         |
-| **Haskell**    | ✅ Working | "Hello, World from Haskell! λ"     |
-| **Java**       | ✅ Working | "Hello, World from Java! ☕"       |
-| **JavaScript** | ✅ Working | "Hello, World from JavaScript! 🟨" |
-| **Julia**      | ✅ Working | "Hello, World from Julia! 🔢"      |
-| **Kotlin**     | ✅ Working | "Hello, World from Kotlin! 🎯"     |
-| **Lisp**       | ✅ Working | "Hello, World from Lisp! 🔥"       |
-| **Lua**        | ✅ Working | "Hello, World from Lua! 🌙"        |
-| **Nim**        | ✅ Working | "Hello, World from Nim! 👑"        |
-| **OCaml**      | ✅ Working | "Hello, World from OCaml! 🐫"      |
-| **Perl**       | ✅ Working | "Hello, World from Perl! 🐪"       |
-| **PHP**        | ✅ Working | "Hello, World from PHP! 🐘"        |
-| **Python**     | ✅ Working | "Hello, World from Python! 🐍"     |
-| **R**          | ✅ Working | "Hello, World from R! 📊"          |
-| **Ruby**       | ✅ Working | "Hello, World from Ruby! 💎"       |
-| **Rust**       | ✅ Working | "Hello, World from Rust! 🦀"       |
-| **Scala**      | ✅ Working | "Hello, World from Scala! 🎭"      |
-| **Swift**      | ✅ Working | "Hello, World from Swift! 🦉"      |
-| **Tcl**        | ✅ Working | "Hello, World from Tcl! 🪶"        |
-| **TypeScript** | ✅ Working | "Hello, World from TypeScript! 📘" |
-| **Zig**        | ✅ Working | "Hello, World from Zig! ⚡"        |
+| Language        | Status     | Test Result                         |
+| --------------- | ---------- | ----------------------------------- |
+| **Ada**         | ✅ Working | "Hello, World from Ada! 🏛️"         |
+| **C**           | ✅ Working | "Hello, World from C! 🔧"           |
+| **C#**          | ✅ Working | "Hello, World from C#! 🔷"          |
+| **C++**         | ✅ Working | "Hello, World from C++! ⚡"         |
+| **Clojure**     | ✅ Working | "Hello, World from Clojure! 🔁"     |
+| **D**           | ✅ Working | "Hello, World from D! 🎯"           |
+| **Dart**        | ✅ Working | "Hello, World from Dart! 🎯"        |
+| **Elixir**      | ✅ Working | "Hello, World from Elixir! 💧"      |
+| **Fortran**     | ✅ Working | "Hello, World from Fortran! 🏗️"     |
+| **Go**          | ✅ Working | "Hello, World from Go! 🐹"          |
+| **Haskell**     | ✅ Working | "Hello, World from Haskell! λ"      |
+| **Java**        | ✅ Working | "Hello, World from Java! ☕"        |
+| **JavaScript**  | ✅ Working | "Hello, World from JavaScript! 🟨"  |
+| **Julia**       | ✅ Working | "Hello, World from Julia! 🔢"       |
+| **Kotlin**      | ✅ Working | "Hello, World from Kotlin! 🎯"      |
+| **Lisp**        | ✅ Working | "Hello, World from Lisp! 🔥"        |
+| **Lua**         | ✅ Working | "Hello, World from Lua! 🌙"         |
+| **Nim**         | ✅ Working | "Hello, World from Nim! 👑"         |
+| **Objective-C** | ✅ Working | "Hello, World from Objective-C! 🍎" |
+| **OCaml**       | ✅ Working | "Hello, World from OCaml! 🐫"       |
+| **Perl**        | ✅ Working | "Hello, World from Perl! 🐪"        |
+| **PHP**         | ✅ Working | "Hello, World from PHP! 🐘"         |
+| **Python**      | ✅ Working | "Hello, World from Python! 🐍"      |
+| **R**           | ✅ Working | "Hello, World from R! 📊"           |
+| **Ruby**        | ✅ Working | "Hello, World from Ruby! 💎"        |
+| **Rust**        | ✅ Working | "Hello, World from Rust! 🦀"        |
+| **Scala**       | ✅ Working | "Hello, World from Scala! 🎭"       |
+| **Swift**       | ✅ Working | "Hello, World from Swift! 🦉"       |
+| **Tcl**         | ✅ Working | "Hello, World from Tcl! 🪶"         |
+| **TypeScript**  | ✅ Working | "Hello, World from TypeScript! 📘"  |
+| **Zig**         | ✅ Working | "Hello, World from Zig! ⚡"         |
 
-## ❌ Known Issues (3)
+## ❌ Known Issues (2)
 
-### Linux-Only Languages (2)
+### Linux-Only Languages (1)
 
 These languages are only available on Linux platforms:
 
-| Language        | Issue      | Error                           |
-| --------------- | ---------- | ------------------------------- |
-| **Objective-C** | Linux-only | `attribute 'objc' missing`      |
-| **Smalltalk**   | Linux-only | `attribute 'smalltalk' missing` |
+| Language      | Issue      | Error                           |
+| ------------- | ---------- | ------------------------------- |
+| **Smalltalk** | Linux-only | `attribute 'smalltalk' missing` |
 
 ### Build Configuration Issues (1)
 
@@ -63,9 +63,9 @@ These languages have build or runtime configuration problems:
 **Results Summary:**
 
 - **Total Languages:** 33
-- **Working:** 30 (91%)
-- **Known Issues:** 3 (9%)
-- **Success Rate:** 91%
+- **Working:** 31 (94%)
+- **Known Issues:** 2 (6%)
+- **Success Rate:** 94%
 
 **Test Environment:**
 
@@ -245,7 +245,7 @@ When adding support for new languages:
 ### Current Architecture Status
 
 - **Total Supported**: 33 languages
-- **Working Languages**: 30 (91%) fully functional for AOC challenges
+- **Working Languages**: 31 (94%) fully functional for AOC challenges
 - **All Languages**: Use unified `mkDefaultOutputs` API with typed parameters
 - **All Languages**: Have consistent development environments with tools
 - **All Languages**: Include working hello world examples
