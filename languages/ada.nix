@@ -43,7 +43,7 @@ let
             exit 1
           fi
         '';
-      } args;
+      } (args // { pkgs = pkgs; });
     };
 in
 {
