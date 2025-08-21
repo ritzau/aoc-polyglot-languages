@@ -30,9 +30,8 @@ let
   solution =
     args:
     let
-      # Extract JDK version from args, default to jdk21
-      jdkVersion = args.jdk or "jdk21";
-      selectedJdk = pkgs.${jdkVersion};
+      # Extract JDK package from args, default to jdk21
+      selectedJdk = args.jdk or pkgs.jdk21;
     in
     base.mkSolution {
       language = "scala";
