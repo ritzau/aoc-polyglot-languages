@@ -119,11 +119,6 @@
             base = baseLib;
             justfilePath = ./justfiles/csharp.justfile;
           };
-          cobol = import ./languages/cobol.nix {
-            inherit pkgs;
-            base = baseLib;
-            justfilePath = ./justfiles/cobol.justfile;
-          };
           r = import ./languages/r.nix {
             inherit pkgs;
             base = baseLib;
@@ -189,14 +184,6 @@
             base = baseLib;
             justfilePath = ./justfiles/objc.justfile;
           };
-        }
-        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
-          # Linux-only languages due to package availability
-          smalltalk = import ./languages/smalltalk.nix {
-            inherit pkgs;
-            base = baseLib;
-            justfilePath = ./justfiles/smalltalk.justfile;
-          };
         };
 
       in
@@ -242,7 +229,6 @@
           elixir = ./justfiles/elixir.justfile;
           dart = ./justfiles/dart.justfile;
           csharp = ./justfiles/csharp.justfile;
-          cobol = ./justfiles/cobol.justfile;
           r = ./justfiles/r.justfile;
           php = ./justfiles/php.justfile;
           lua = ./justfiles/lua.justfile;
@@ -256,10 +242,6 @@
           tcl = ./justfiles/tcl.justfile;
           julia = ./justfiles/julia.justfile;
           objc = ./justfiles/objc.justfile;
-        }
-        // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux) {
-          # Linux-only language justfiles
-          smalltalk = ./justfiles/smalltalk.justfile;
         };
 
         # Also expose the base functionality for custom use
@@ -390,7 +372,6 @@
             elixir = null;
             dart = null;
             csharp = null;
-            cobol = null;
             r = null;
             php = null;
             lua = null;

@@ -4,11 +4,32 @@
   justfilePath ? null,
 }:
 let
+  # Override gnucobol to remove heavy TeX dependencies for faster builds
+  gnucobol-minimal = pkgs.gnucobol.overrideAttrs (oldAttrs: {
+    # Disable documentation build to avoid massive TeX dependencies
+    configureFlags = (oldAttrs.configureFlags or [ ]) ++ [
+      "--disable-doc"
+      "--without-help2man"
+    ];
+    # Remove documentation-related build inputs
+    nativeBuildInputs = builtins.filter (
+      pkg:
+      let
+        name = pkg.pname or pkg.name or "";
+      in
+      !(builtins.elem name [
+        "texlive-2025-env"
+        "help2man"
+        "texinfo"
+      ])
+    ) (oldAttrs.nativeBuildInputs or [ ]);
+  });
+
   devShell = base.mkLanguageShell {
     name = "COBOL";
     emoji = "🏢";
-    languageTools = with pkgs; [
-      gnucobol
+    languageTools = [
+      gnucobol-minimal
     ];
     extraShellHook =
       if justfilePath != null then
@@ -31,7 +52,7 @@ let
       language = "cobol";
       package = pkgs.writeShellApplication {
         name = args.pname or "hello-cobol";
-        runtimeInputs = [ pkgs.gnucobol ];
+        runtimeInputs = [ gnucobol-minimal ];
         text = ''
           # Find the COBOL file in the source directory
           cobolfile=$(find ${args.src or ./.} -maxdepth 1 -name "*.cob" -o -name "*.cobol" -o -name "*.cbl" | head -1)
